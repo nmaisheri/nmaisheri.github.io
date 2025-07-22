@@ -30,3 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error loading projects:', error));
 });
+
+// Main JavaScript functionality
+console.log('Portfolio loaded successfully!');
