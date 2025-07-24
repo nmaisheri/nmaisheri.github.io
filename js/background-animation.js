@@ -35,7 +35,7 @@ class ParticleSystem {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
             
-            // Create stardust trail
+            // Create colorful stardust trail
             const distance = Math.sqrt(
                 Math.pow(this.mouse.x - this.mouse.prevX, 2) + 
                 Math.pow(this.mouse.y - this.mouse.prevY, 2)
@@ -54,7 +54,7 @@ class ParticleSystem {
     }
     
     init() {
-        // Create many background stars (increased density)
+        // Create many background stars with varied colors
         const starCount = Math.floor((this.canvas.width * this.canvas.height) / 2000);
         for (let i = 0; i < starCount; i++) {
             this.stars.push(new Star(
@@ -71,8 +71,18 @@ class ParticleSystem {
     }
     
     animate() {
-        // Create deep space background
-        this.ctx.fillStyle = '#000000';
+        // Create galaxy gradient background
+        const gradient = this.ctx.createRadialGradient(
+            this.canvas.width * 0.3, this.canvas.height * 0.2, 0,
+            this.canvas.width * 0.5, this.canvas.height * 0.5, Math.max(this.canvas.width, this.canvas.height)
+        );
+        gradient.addColorStop(0, '#e54ed0');
+        gradient.addColorStop(0.25, '#9f45b0');
+        gradient.addColorStop(0.5, '#44008b');
+        gradient.addColorStop(0.75, '#00076f');
+        gradient.addColorStop(1, '#000000');
+        
+        this.ctx.fillStyle = gradient;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Draw background stars
@@ -139,7 +149,7 @@ class ParticleSystem {
         
         // Sort by distance and take the closest ones
         nearbyStars.sort((a, b) => a.distance - b.distance);
-        const selectedStars = nearbyStars.slice(0, 5); // Only connect 5 stars max
+        const selectedStars = nearbyStars.slice(0, 5);
         
         // Draw a single line connecting the stars in order of distance
         for (let i = 0; i < selectedStars.length - 1; i++) {
@@ -149,7 +159,7 @@ class ParticleSystem {
             const opacity = Math.max(0, 1 - (selectedStars[i].distance / cursorRadius)) * 0.5;
             
             this.ctx.beginPath();
-            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            this.ctx.strokeStyle = `rgba(255, 228, 242, ${opacity})`;
             this.ctx.lineWidth = 1;
             this.ctx.moveTo(star1.x, star1.y);
             this.ctx.lineTo(star2.x, star2.y);
@@ -162,7 +172,7 @@ class ParticleSystem {
             const opacity = Math.max(0, 1 - (selectedStars[0].distance / cursorRadius)) * 0.3;
             
             this.ctx.beginPath();
-            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            this.ctx.strokeStyle = `rgba(229, 78, 208, ${opacity})`;
             this.ctx.lineWidth = 0.8;
             this.ctx.moveTo(this.mouse.x, this.mouse.y);
             this.ctx.lineTo(firstStar.x, firstStar.y);
@@ -177,6 +187,10 @@ class Star {
         this.y = y;
         this.type = type;
         
+        // Color palette for stars
+        const colors = ['#ffe4f2', '#e54ed0', '#9f45b0', '#ffffff'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        
         if (type === 'trail') {
             this.size = Math.random() * 1.5 + 0.5;
             this.speedX = (Math.random() - 0.5) * 1;
@@ -184,6 +198,7 @@ class Star {
             this.life = 40;
             this.maxLife = 40;
             this.brightness = 0.9;
+            this.color = '#e54ed0'; // Pink trail
         } else {
             this.size = Math.random() * 1.8 + 0.3;
             this.speedX = (Math.random() - 0.5) * 0.1;
@@ -245,7 +260,15 @@ class Star {
         }
         
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fillStyle = this.color.replace(')', `, ${opacity})`).replace(/rgb|#[a-f0-9]{6}/i, (match) => {
+            if (match.startsWith('#')) {
+                const r = parseInt(match.slice(1, 3), 16);
+                const g = parseInt(match.slice(3, 5), 16);
+                const b = parseInt(match.slice(5, 7), 16);
+                return `rgba(${r}, ${g}, ${b}`;
+            }
+            return match.replace('rgb', 'rgba');
+        });
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
@@ -264,6 +287,10 @@ class ShootingStar {
         this.size = Math.random() * 1.5 + 0.5;
         this.tail = [];
         this.life = Math.random() * 300 + 200;
+        
+        // Random color from palette
+        const colors = ['#ffe4f2', '#e54ed0', '#9f45b0'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
     }
     
     update() {
@@ -282,14 +309,20 @@ class ShootingStar {
         for (let i = 0; i < this.tail.length; i++) {
             const opacity = (i / this.tail.length) * 0.4;
             ctx.beginPath();
-            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            const r = parseInt(this.color.slice(1, 3), 16);
+            const g = parseInt(this.color.slice(3, 5), 16);
+            const b = parseInt(this.color.slice(5, 7), 16);
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
             ctx.arc(this.tail[i].x, this.tail[i].y, this.size * (i / this.tail.length), 0, Math.PI * 2);
             ctx.fill();
         }
         
         // Draw main star
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        const r = parseInt(this.color.slice(1, 3), 16);
+        const g = parseInt(this.color.slice(3, 5), 16);
+        const b = parseInt(this.color.slice(5, 7), 16);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.9)`;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
