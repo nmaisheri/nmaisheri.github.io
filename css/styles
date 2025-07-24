@@ -10,6 +10,7 @@ body {
     color: #ffffff;
     overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
 }
 
 #backgroundCanvas {
@@ -18,18 +19,20 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -10; /* Changed from -1 to -10 to ensure it stays behind everything */
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    pointer-events: none; /* This allows mouse events to pass through to content below */
 }
 
+/* Ensure all content has proper z-index layering */
 header {
-    background: rgba(53, 66, 74, 0.9);
+    background: rgba(53, 66, 74, 0.85); /* Slightly more transparent */
     backdrop-filter: blur(10px);
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
     position: relative;
-    z-index: 10;
+    z-index: 100; /* High z-index to stay on top */
 }
 
 header nav ul {
@@ -59,6 +62,8 @@ h1 {
     font-size: 3em;
     font-weight: 300;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 101;
 }
 
 h2 {
@@ -66,11 +71,13 @@ h2 {
     margin: 40px 0 20px;
     text-align: center;
     color: #64ffda;
+    position: relative;
+    z-index: 101;
 }
 
 main {
     position: relative;
-    z-index: 5;
+    z-index: 50; /* Ensure main content is above canvas */
     padding: 60px 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -79,37 +86,46 @@ main {
 section {
     margin: 80px 0;
     padding: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08); /* Slightly more opaque */
+    backdrop-filter: blur(15px);
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 51;
 }
 
 p {
     line-height: 1.8;
     font-size: 1.1em;
     text-align: center;
+    position: relative;
+    z-index: 52;
 }
 
 .project {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12); /* More opaque for better readability */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     margin: 30px 0;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 53;
 }
 
 .project:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(100, 255, 218, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .project h3 {
     margin: 0 0 15px 0;
     color: #64ffda;
+    position: relative;
+    z-index: 54;
 }
 
 .project a {
@@ -122,6 +138,8 @@ p {
     transition: all 0.3s ease;
     display: inline-block;
     margin-top: 10px;
+    position: relative;
+    z-index: 55;
 }
 
 .project a:hover {
@@ -132,6 +150,8 @@ p {
 .skills {
     margin-top: 30px;
     text-align: left;
+    position: relative;
+    z-index: 52;
 }
 
 .skills h3 {
@@ -142,11 +162,16 @@ p {
 footer {
     text-align: center;
     padding: 40px 0;
-    background: rgba(53, 66, 74, 0.9);
+    background: rgba(53, 66, 74, 0.85);
     backdrop-filter: blur(10px);
     color: #ffffff;
     position: relative;
-    z-index: 10;
+    z-index: 100;
+}
+
+/* Text shadow for better readability over the animated background */
+h1, h2, h3, p, a {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 @media (max-width: 768px) {
