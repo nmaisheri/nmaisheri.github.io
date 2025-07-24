@@ -11,8 +11,8 @@ class ParticleSystem {
         this.shootingStars = [];
         this.mouse = { x: 0, y: 0, prevX: 0, prevY: 0 };
         this.trailParticles = [];
+        this.constellationLines = [];
         
-        // Ensure canvas doesn't interfere with mouse events
         this.canvas.style.pointerEvents = 'none';
         
         this.resize();
@@ -29,7 +29,6 @@ class ParticleSystem {
     bindEvents() {
         window.addEventListener('resize', () => this.resize());
         
-        // Listen to mouse events on the document, not the canvas
         document.addEventListener('mousemove', (e) => {
             this.mouse.prevX = this.mouse.x;
             this.mouse.prevY = this.mouse.y;
@@ -42,34 +41,21 @@ class ParticleSystem {
                 Math.pow(this.mouse.y - this.mouse.prevY, 2)
             );
             
-            // Only create trail particles if mouse is moving fast enough
-            if (distance > 3) {
-                for (let i = 0; i < 2; i++) {
+            if (distance > 5) {
+                for (let i = 0; i < 1; i++) {
                     this.trailParticles.push(new Star(
-                        this.mouse.x + (Math.random() - 0.5) * 20,
-                        this.mouse.y + (Math.random() - 0.5) * 20,
+                        this.mouse.x + (Math.random() - 0.5) * 10,
+                        this.mouse.y + (Math.random() - 0.5) * 10,
                         'trail'
                     ));
                 }
             }
         });
-        
-        // Keep click effect but make it more dramatic
-        document.addEventListener('click', (e) => {
-            // Create star explosion
-            for (let i = 0; i < 20; i++) {
-                this.trailParticles.push(new Star(
-                    e.clientX + (Math.random() - 0.5) * 80,
-                    e.clientY + (Math.random() - 0.5) * 80,
-                    'burst'
-                ));
-            }
-        });
     }
     
     init() {
-        // Create many background stars
-        const starCount = Math.floor((this.canvas.width * this.canvas.height) / 3000); // More stars
+        // Create many background stars (increased density)
+        const starCount = Math.floor((this.canvas.width * this.canvas.height) / 2000);
         for (let i = 0; i < starCount; i++) {
             this.stars.push(new Star(
                 Math.random() * this.canvas.width,
@@ -116,11 +102,11 @@ class ParticleSystem {
             }
         });
         
-        // Draw connections between nearby stars
-        this.drawStarConnections();
+        // Draw constellation connections based on cursor position
+        this.drawConstellationLines();
         
         // Maintain star count
-        while (this.stars.length < Math.floor((this.canvas.width * this.canvas.height) / 3000)) {
+        while (this.stars.length < Math.floor((this.canvas.width * this.canvas.height) / 2000)) {
             this.stars.push(new Star(
                 Math.random() * this.canvas.width,
                 Math.random() * this.canvas.height,
@@ -129,29 +115,66 @@ class ParticleSystem {
         }
         
         // Limit trail particles
-        if (this.trailParticles.length > 150) {
-            this.trailParticles.splice(0, this.trailParticles.length - 150);
+        if (this.trailParticles.length > 50) {
+            this.trailParticles.splice(0, this.trailParticles.length - 50);
         }
         
         requestAnimationFrame(() => this.animate());
     }
     
-    drawStarConnections() {
-        for (let i = 0; i < this.stars.length; i++) {
-            for (let j = i + 1; j < this.stars.length; j++) {
-                const dx = this.stars[i].x - this.stars[j].x;
-                const dy = this.stars[i].y - this.stars[j].y;
+    drawConstellationLines() {
+        // Find stars near the cursor and connect them
+        const nearbyStars = [];
+        const cursorRadius = 200;
+        
+        this.stars.forEach(star => {
+            const dx = star.x - this.mouse.x;
+            const dy = star.y - this.mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < cursorRadius) {
+                nearbyStars.push({ star, distance });
+            }
+        });
+        
+        // Sort by distance and take the closest ones
+        nearbyStars.sort((a, b) => a.distance - b.distance);
+        const selectedStars = nearbyStars.slice(0, 8); // Connect up to 8 stars
+        
+        // Draw lines between nearby stars to form constellation
+        for (let i = 0; i < selectedStars.length; i++) {
+            for (let j = i + 1; j < selectedStars.length; j++) {
+                const star1 = selectedStars[i].star;
+                const star2 = selectedStars[j].star;
+                
+                const dx = star1.x - star2.x;
+                const dy = star1.y - star2.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < 80) {
-                    const opacity = (80 - distance) / 80 * 0.2;
+                if (distance < 150) {
+                    const opacity = Math.max(0, 1 - (distance / 150)) * 0.6;
+                    
                     this.ctx.beginPath();
                     this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                    this.ctx.lineWidth = 0.3;
-                    this.ctx.moveTo(this.stars[i].x, this.stars[i].y);
-                    this.ctx.lineTo(this.stars[j].x, this.stars[j].y);
+                    this.ctx.lineWidth = 1;
+                    this.ctx.moveTo(star1.x, star1.y);
+                    this.ctx.lineTo(star2.x, star2.y);
                     this.ctx.stroke();
                 }
+            }
+            
+            // Also connect each star to the cursor position for a more dynamic effect
+            const star = selectedStars[i].star;
+            const distanceToCursor = selectedStars[i].distance;
+            const opacity = Math.max(0, 1 - (distanceToCursor / cursorRadius)) * 0.3;
+            
+            if (opacity > 0.1) {
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                this.ctx.lineWidth = 0.5;
+                this.ctx.moveTo(star.x, star.y);
+                this.ctx.lineTo(this.mouse.x, this.mouse.y);
+                this.ctx.stroke();
             }
         }
     }
@@ -163,26 +186,19 @@ class Star {
         this.y = y;
         this.type = type;
         
-        if (type === 'burst') {
-            this.size = Math.random() * 3 + 1;
-            this.speedX = (Math.random() - 0.5) * 6;
-            this.speedY = (Math.random() - 0.5) * 6;
-            this.life = 60;
-            this.maxLife = 60;
-            this.brightness = 1;
-        } else if (type === 'trail') {
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 2;
-            this.speedY = (Math.random() - 0.5) * 2;
-            this.life = 30;
-            this.maxLife = 30;
-            this.brightness = 0.8;
-        } else {
+        if (type === 'trail') {
             this.size = Math.random() * 1.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.2;
-            this.speedY = (Math.random() - 0.5) * 0.2;
+            this.speedX = (Math.random() - 0.5) * 1;
+            this.speedY = (Math.random() - 0.5) * 1;
+            this.life = 40;
+            this.maxLife = 40;
+            this.brightness = 0.9;
+        } else {
+            this.size = Math.random() * 1.8 + 0.3;
+            this.speedX = (Math.random() - 0.5) * 0.1;
+            this.speedY = (Math.random() - 0.5) * 0.1;
             this.life = Infinity;
-            this.brightness = Math.random() * 0.8 + 0.2;
+            this.brightness = Math.random() * 0.9 + 0.1;
             this.twinkle = Math.random() * Math.PI * 2;
         }
         
@@ -191,35 +207,35 @@ class Star {
     }
     
     update(mouse) {
-        if (this.type === 'burst' || this.type === 'trail') {
+        if (this.type === 'trail') {
             this.x += this.speedX;
             this.y += this.speedY;
-            this.speedX *= 0.98;
-            this.speedY *= 0.98;
+            this.speedX *= 0.95;
+            this.speedY *= 0.95;
             this.life--;
-            this.size *= 0.99;
+            this.size *= 0.98;
         } else {
-            // Gentle mouse attraction for background stars
+            // Very gentle mouse attraction for background stars
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 150) {
-                const force = (150 - distance) / 150;
-                this.x += (dx / distance) * force * 0.1;
-                this.y += (dy / distance) * force * 0.1;
+            if (distance < 100) {
+                const force = (100 - distance) / 100;
+                this.x += (dx / distance) * force * 0.05;
+                this.y += (dy / distance) * force * 0.05;
             }
             
             // Return to original position
-            this.x += (this.originalX - this.x) * 0.01;
-            this.y += (this.originalY - this.y) * 0.01;
+            this.x += (this.originalX - this.x) * 0.005;
+            this.y += (this.originalY - this.y) * 0.005;
             
             // Add drift
             this.x += this.speedX;
             this.y += this.speedY;
             
             // Twinkling effect
-            this.twinkle += 0.02;
+            this.twinkle += 0.01;
             
             // Wrap around edges
             if (this.x < 0) this.x = window.innerWidth;
@@ -231,10 +247,10 @@ class Star {
     
     draw(ctx) {
         let opacity = this.brightness;
-        if (this.type === 'burst' || this.type === 'trail') {
+        if (this.type === 'trail') {
             opacity = (this.life / this.maxLife) * this.brightness;
         } else {
-            opacity = this.brightness * (0.5 + 0.5 * Math.sin(this.twinkle));
+            opacity = this.brightness * (0.3 + 0.7 * Math.sin(this.twinkle));
         }
         
         ctx.beginPath();
@@ -242,10 +258,10 @@ class Star {
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         
-        // Add glow for larger stars
-        if (this.size > 1) {
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = `rgba(255, 255, 255, ${opacity * 0.5})`;
+        // Add slight glow for larger stars only
+        if (this.size > 1.2 && this.type === 'background') {
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = `rgba(255, 255, 255, ${opacity * 0.3})`;
             ctx.fill();
             ctx.shadowBlur = 0;
         }
@@ -261,15 +277,15 @@ class ShootingStar {
         this.x = Math.random() * window.innerWidth;
         this.y = -10;
         this.speedX = (Math.random() - 0.5) * 2;
-        this.speedY = Math.random() * 3 + 2;
-        this.size = Math.random() * 2 + 1;
+        this.speedY = Math.random() * 2 + 1;
+        this.size = Math.random() * 1.5 + 0.5;
         this.tail = [];
-        this.life = Math.random() * 200 + 100;
+        this.life = Math.random() * 300 + 200;
     }
     
     update() {
         this.tail.push({ x: this.x, y: this.y });
-        if (this.tail.length > 15) {
+        if (this.tail.length > 20) {
             this.tail.shift();
         }
         
@@ -281,7 +297,7 @@ class ShootingStar {
     draw(ctx) {
         // Draw tail
         for (let i = 0; i < this.tail.length; i++) {
-            const opacity = (i / this.tail.length) * 0.5;
+            const opacity = (i / this.tail.length) * 0.4;
             ctx.beginPath();
             ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.arc(this.tail[i].x, this.tail[i].y, this.size * (i / this.tail.length), 0, Math.PI * 2);
@@ -290,14 +306,9 @@ class ShootingStar {
         
         // Draw main star
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-        ctx.fill();
-        ctx.shadowBlur = 0;
     }
     
     isOffScreen(width, height) {
@@ -305,7 +316,6 @@ class ShootingStar {
     }
 }
 
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ParticleSystem();
 });

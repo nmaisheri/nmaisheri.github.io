@@ -70,7 +70,6 @@ h1 {
     margin: 0;
     font-size: 4em;
     font-weight: 100;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 1001;
     letter-spacing: 3px;
@@ -81,7 +80,6 @@ h2 {
     margin: 40px 0 20px;
     text-align: center;
     color: #ffffff;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
     position: relative;
     z-index: 1001;
     font-weight: 200;
@@ -124,7 +122,6 @@ p {
     line-height: 1.8;
     font-size: 1.2em;
     text-align: center;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 102;
     color: #e0e0e0;
@@ -169,7 +166,6 @@ p {
 .project h3 {
     margin: 0 0 15px 0;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     position: relative;
     z-index: 104;
     font-size: 1.4em;
@@ -209,7 +205,6 @@ p {
 .skills h3 {
     color: #ffffff;
     margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     font-weight: 300;
 }
 
@@ -222,15 +217,6 @@ footer {
     z-index: 1000;
     margin-top: 100px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Galaxy glow effects */
-h1, h2, h3 {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
-}
-
-p, a {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
