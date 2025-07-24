@@ -7,7 +7,7 @@
 html, body {
     height: 100%;
     font-family: 'Arial', sans-serif;
-    background-color: #0a0a0a;
+    background-color: #000000;
     color: #ffffff;
     overflow-x: hidden;
 }
@@ -20,19 +20,19 @@ html, body {
     height: 100vh !important;
     z-index: -999 !important;
     pointer-events: none !important;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 30%, #0f0f23 60%, #000000 100%);
 }
 
 body {
     position: relative;
     z-index: 1;
+    background: transparent;
 }
 
 header {
-    background: rgba(53, 66, 74, 0.85);
-    backdrop-filter: blur(10px);
+    background: transparent;
     color: #ffffff;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
     position: relative;
     z-index: 1000;
@@ -44,169 +44,215 @@ header nav ul {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 header nav a {
     color: #ffffff;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 24px;
+    border-radius: 30px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 1001;
+    backdrop-filter: blur(10px);
 }
 
 header nav a:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
 h1 {
     margin: 0;
-    font-size: 3em;
-    font-weight: 300;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-size: 4em;
+    font-weight: 100;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 1001;
+    letter-spacing: 3px;
 }
 
 h2 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     margin: 40px 0 20px;
     text-align: center;
-    color: #64ffda;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
     position: relative;
     z-index: 1001;
+    font-weight: 200;
+    letter-spacing: 2px;
 }
 
 main {
     position: relative;
     z-index: 100;
-    padding: 60px 20px;
+    padding: 80px 20px;
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
 }
 
 section {
-    margin: 80px 0;
-    padding: 40px;
-    background: rgba(20, 30, 40, 0.9) !important;
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
-    border: 1px solid rgba(100, 255, 218, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    margin: 120px 0;
+    padding: 60px 40px;
+    background: transparent;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     z-index: 101;
+    backdrop-filter: blur(5px);
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    z-index: -1;
 }
 
 p {
     line-height: 1.8;
-    font-size: 1.1em;
+    font-size: 1.2em;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     position: relative;
     z-index: 102;
+    color: #e0e0e0;
+    font-weight: 300;
 }
 
 .project {
-    background: rgba(30, 40, 50, 0.95) !important;
-    border: 1px solid rgba(100, 255, 218, 0.4);
-    margin: 30px 0;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 40px 0;
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
     position: relative;
     z-index: 103;
+    backdrop-filter: blur(10px);
+}
+
+.project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    z-index: -1;
+    transition: all 0.3s ease;
 }
 
 .project:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
-    background: rgba(40, 50, 60, 0.95) !important;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.project:hover::before {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .project h3 {
     margin: 0 0 15px 0;
-    color: #64ffda;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     position: relative;
     z-index: 104;
+    font-size: 1.4em;
+    font-weight: 300;
 }
 
 .project a {
-    color: #64ffda;
+    color: #ffffff;
     text-decoration: none;
     margin-right: 20px;
-    padding: 8px 16px;
-    border: 1px solid #64ffda;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
     transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 15px;
     position: relative;
     z-index: 105;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .project a:hover {
-    background: #64ffda;
-    color: #0a0a0a;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 .skills {
-    margin-top: 30px;
+    margin-top: 40px;
     text-align: left;
     position: relative;
     z-index: 102;
 }
 
 .skills h3 {
-    color: #64ffda;
+    color: #ffffff;
     margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    font-weight: 300;
 }
 
 footer {
     text-align: center;
-    padding: 40px 0;
-    background: rgba(53, 66, 74, 0.95);
-    backdrop-filter: blur(10px);
+    padding: 60px 0;
+    background: transparent;
     color: #ffffff;
     position: relative;
     z-index: 1000;
     margin-top: 100px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Make sure all text is readable */
-h1, h2, h3, h4, h5, h6, p, a, span, div {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+/* Galaxy glow effects */
+h1, h2, h3 {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+p, a {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
     header nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
     
     h1 {
-        font-size: 2.2em;
+        font-size: 2.5em;
     }
 
     h2 {
-        font-size: 1.8em;
+        font-size: 2em;
     }
     
     main {
-        padding: 40px 10px;
+        padding: 40px 15px;
     }
     
     section {
-        margin: 40px 0;
-        padding: 20px;
+        margin: 60px 0;
+        padding: 30px 20px;
     }
 }

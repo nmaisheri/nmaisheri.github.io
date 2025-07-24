@@ -7,9 +7,9 @@ class ParticleSystem {
         }
         
         this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
+        this.stars = [];
+        this.shootingStars = [];
         this.mouse = { x: 0, y: 0, prevX: 0, prevY: 0 };
-        this.connections = [];
         this.trailParticles = [];
         
         // Ensure canvas doesn't interfere with mouse events
@@ -36,18 +36,18 @@ class ParticleSystem {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
             
-            // Create trail effect as mouse moves
+            // Create stardust trail
             const distance = Math.sqrt(
                 Math.pow(this.mouse.x - this.mouse.prevX, 2) + 
                 Math.pow(this.mouse.y - this.mouse.prevY, 2)
             );
             
             // Only create trail particles if mouse is moving fast enough
-            if (distance > 5) {
-                for (let i = 0; i < 3; i++) {
-                    this.trailParticles.push(new Particle(
-                        this.mouse.x + (Math.random() - 0.5) * 30,
-                        this.mouse.y + (Math.random() - 0.5) * 30,
+            if (distance > 3) {
+                for (let i = 0; i < 2; i++) {
+                    this.trailParticles.push(new Star(
+                        this.mouse.x + (Math.random() - 0.5) * 20,
+                        this.mouse.y + (Math.random() - 0.5) * 20,
                         'trail'
                     ));
                 }
@@ -56,10 +56,11 @@ class ParticleSystem {
         
         // Keep click effect but make it more dramatic
         document.addEventListener('click', (e) => {
-            for (let i = 0; i < 15; i++) {
-                this.trailParticles.push(new Particle(
-                    e.clientX + (Math.random() - 0.5) * 100,
-                    e.clientY + (Math.random() - 0.5) * 100,
+            // Create star explosion
+            for (let i = 0; i < 20; i++) {
+                this.trailParticles.push(new Star(
+                    e.clientX + (Math.random() - 0.5) * 80,
+                    e.clientY + (Math.random() - 0.5) * 80,
                     'burst'
                 ));
             }
@@ -67,26 +68,44 @@ class ParticleSystem {
     }
     
     init() {
-        // Create initial particles
-        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
-        for (let i = 0; i < particleCount; i++) {
-            this.particles.push(new Particle(
+        // Create many background stars
+        const starCount = Math.floor((this.canvas.width * this.canvas.height) / 3000); // More stars
+        for (let i = 0; i < starCount; i++) {
+            this.stars.push(new Star(
                 Math.random() * this.canvas.width,
-                Math.random() * this.canvas.height
+                Math.random() * this.canvas.height,
+                'background'
             ));
+        }
+        
+        // Create some shooting stars
+        for (let i = 0; i < 3; i++) {
+            this.shootingStars.push(new ShootingStar());
         }
     }
     
     animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // Create deep space background
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Update and draw background particles
-        this.particles.forEach((particle, index) => {
-            particle.update(this.mouse);
-            particle.draw(this.ctx);
+        // Draw background stars
+        this.stars.forEach(star => {
+            star.update(this.mouse);
+            star.draw(this.ctx);
         });
         
-        // Update and draw trail particles
+        // Draw shooting stars
+        this.shootingStars.forEach((star, index) => {
+            star.update();
+            star.draw(this.ctx);
+            
+            if (star.isOffScreen(this.canvas.width, this.canvas.height)) {
+                this.shootingStars[index] = new ShootingStar();
+            }
+        });
+        
+        // Draw trail particles
         this.trailParticles.forEach((particle, index) => {
             particle.update(this.mouse);
             particle.draw(this.ctx);
@@ -97,91 +116,74 @@ class ParticleSystem {
             }
         });
         
-        // Draw connections between nearby particles
-        this.drawConnections();
+        // Draw connections between nearby stars
+        this.drawStarConnections();
         
-        // Draw cursor glow effect
-        this.drawCursorGlow();
-        
-        // Maintain background particle count
-        while (this.particles.length < 80) {
-            this.particles.push(new Particle(
+        // Maintain star count
+        while (this.stars.length < Math.floor((this.canvas.width * this.canvas.height) / 3000)) {
+            this.stars.push(new Star(
                 Math.random() * this.canvas.width,
-                Math.random() * this.canvas.height
+                Math.random() * this.canvas.height,
+                'background'
             ));
         }
         
-        // Limit trail particles to prevent performance issues
-        if (this.trailParticles.length > 100) {
-            this.trailParticles.splice(0, this.trailParticles.length - 100);
+        // Limit trail particles
+        if (this.trailParticles.length > 150) {
+            this.trailParticles.splice(0, this.trailParticles.length - 150);
         }
         
         requestAnimationFrame(() => this.animate());
     }
     
-    drawConnections() {
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const dx = this.particles[i].x - this.particles[j].x;
-                const dy = this.particles[i].y - this.particles[j].y;
+    drawStarConnections() {
+        for (let i = 0; i < this.stars.length; i++) {
+            for (let j = i + 1; j < this.stars.length; j++) {
+                const dx = this.stars[i].x - this.stars[j].x;
+                const dy = this.stars[i].y - this.stars[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < 120) {
-                    const opacity = (120 - distance) / 120 * 0.3; // Reduced opacity
+                if (distance < 80) {
+                    const opacity = (80 - distance) / 80 * 0.2;
                     this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(100, 255, 218, ${opacity})`;
-                    this.ctx.lineWidth = 0.5;
-                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                    this.ctx.lineWidth = 0.3;
+                    this.ctx.moveTo(this.stars[i].x, this.stars[i].y);
+                    this.ctx.lineTo(this.stars[j].x, this.stars[j].y);
                     this.ctx.stroke();
                 }
             }
         }
     }
-    
-    drawCursorGlow() {
-        if (this.mouse.x > 0 && this.mouse.y > 0) {
-            const gradient = this.ctx.createRadialGradient(
-                this.mouse.x, this.mouse.y, 0,
-                this.mouse.x, this.mouse.y, 50
-            );
-            gradient.addColorStop(0, 'rgba(100, 255, 218, 0.2)'); // Reduced opacity
-            gradient.addColorStop(1, 'rgba(100, 255, 218, 0)');
-            
-            this.ctx.beginPath();
-            this.ctx.fillStyle = gradient;
-            this.ctx.arc(this.mouse.x, this.mouse.y, 50, 0, Math.PI * 2);
-            this.ctx.fill();
-        }
-    }
 }
 
-class Particle {
-    constructor(x, y, type = 'normal') {
+class Star {
+    constructor(x, y, type = 'background') {
         this.x = x;
         this.y = y;
         this.type = type;
         
         if (type === 'burst') {
-            this.size = Math.random() * 4 + 3;
-            this.speedX = (Math.random() - 0.5) * 10;
-            this.speedY = (Math.random() - 0.5) * 10;
-            this.life = 80;
-            this.maxLife = 80;
-            this.color = `hsl(${Math.random() * 60 + 180}, 70%, 60%)`;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 6;
+            this.speedY = (Math.random() - 0.5) * 6;
+            this.life = 60;
+            this.maxLife = 60;
+            this.brightness = 1;
         } else if (type === 'trail') {
-            this.size = Math.random() * 2 + 1;
-            this.speedX = (Math.random() - 0.5) * 3;
-            this.speedY = (Math.random() - 0.5) * 3;
-            this.life = 40;
-            this.maxLife = 40;
-            this.color = `hsl(${Math.random() * 30 + 180}, 80%, 70%)`;
-        } else {
             this.size = Math.random() * 2 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.speedX = (Math.random() - 0.5) * 2;
+            this.speedY = (Math.random() - 0.5) * 2;
+            this.life = 30;
+            this.maxLife = 30;
+            this.brightness = 0.8;
+        } else {
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.2;
+            this.speedY = (Math.random() - 0.5) * 0.2;
             this.life = Infinity;
-            this.color = '#64ffda';
+            this.brightness = Math.random() * 0.8 + 0.2;
+            this.twinkle = Math.random() * Math.PI * 2;
         }
         
         this.originalX = x;
@@ -197,24 +199,27 @@ class Particle {
             this.life--;
             this.size *= 0.99;
         } else {
-            // Mouse attraction for background particles
+            // Gentle mouse attraction for background stars
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 200) {
-                const force = (200 - distance) / 200;
-                this.x += (dx / distance) * force * 0.5;
-                this.y += (dy / distance) * force * 0.5;
+            if (distance < 150) {
+                const force = (150 - distance) / 150;
+                this.x += (dx / distance) * force * 0.1;
+                this.y += (dy / distance) * force * 0.1;
             }
             
-            // Return to original position slowly
-            this.x += (this.originalX - this.x) * 0.02;
-            this.y += (this.originalY - this.y) * 0.02;
+            // Return to original position
+            this.x += (this.originalX - this.x) * 0.01;
+            this.y += (this.originalY - this.y) * 0.01;
             
-            // Add some drift
+            // Add drift
             this.x += this.speedX;
             this.y += this.speedY;
+            
+            // Twinkling effect
+            this.twinkle += 0.02;
             
             // Wrap around edges
             if (this.x < 0) this.x = window.innerWidth;
@@ -225,31 +230,78 @@ class Particle {
     }
     
     draw(ctx) {
-        let opacity = 1;
+        let opacity = this.brightness;
         if (this.type === 'burst' || this.type === 'trail') {
-            opacity = this.life / this.maxLife;
+            opacity = (this.life / this.maxLife) * this.brightness;
+        } else {
+            opacity = this.brightness * (0.5 + 0.5 * Math.sin(this.twinkle));
         }
         
         ctx.beginPath();
-        
-        if (this.type === 'burst') {
-            ctx.fillStyle = this.color.replace('60%)', `60%, ${opacity})`);
-        } else if (this.type === 'trail') {
-            ctx.fillStyle = this.color.replace('70%)', `70%, ${opacity})`);
-        } else {
-            ctx.fillStyle = `rgba(100, 255, 218, ${opacity * 0.6})`; // Reduced opacity
-        }
-        
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         
-        // Add glow effect
-        if (this.type !== 'normal') {
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = this.color;
+        // Add glow for larger stars
+        if (this.size > 1) {
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = `rgba(255, 255, 255, ${opacity * 0.5})`;
             ctx.fill();
             ctx.shadowBlur = 0;
         }
+    }
+}
+
+class ShootingStar {
+    constructor() {
+        this.reset();
+    }
+    
+    reset() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = -10;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = Math.random() * 3 + 2;
+        this.size = Math.random() * 2 + 1;
+        this.tail = [];
+        this.life = Math.random() * 200 + 100;
+    }
+    
+    update() {
+        this.tail.push({ x: this.x, y: this.y });
+        if (this.tail.length > 15) {
+            this.tail.shift();
+        }
+        
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.life--;
+    }
+    
+    draw(ctx) {
+        // Draw tail
+        for (let i = 0; i < this.tail.length; i++) {
+            const opacity = (i / this.tail.length) * 0.5;
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.arc(this.tail[i].x, this.tail[i].y, this.size * (i / this.tail.length), 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Draw main star
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+    
+    isOffScreen(width, height) {
+        return this.y > height + 50 || this.x < -50 || this.x > width + 50 || this.life <= 0;
     }
 }
 
