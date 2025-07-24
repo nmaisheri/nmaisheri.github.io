@@ -102,7 +102,7 @@ class ParticleSystem {
             }
         });
         
-        // Draw constellation connections based on cursor position
+        // Draw simple constellation line
         this.drawConstellationLines();
         
         // Maintain star count
@@ -123,9 +123,9 @@ class ParticleSystem {
     }
     
     drawConstellationLines() {
-        // Find stars near the cursor and connect them
+        // Find stars near the cursor
         const nearbyStars = [];
-        const cursorRadius = 200;
+        const cursorRadius = 150;
         
         this.stars.forEach(star => {
             const dx = star.x - this.mouse.x;
@@ -139,43 +139,34 @@ class ParticleSystem {
         
         // Sort by distance and take the closest ones
         nearbyStars.sort((a, b) => a.distance - b.distance);
-        const selectedStars = nearbyStars.slice(0, 8); // Connect up to 8 stars
+        const selectedStars = nearbyStars.slice(0, 5); // Only connect 5 stars max
         
-        // Draw lines between nearby stars to form constellation
-        for (let i = 0; i < selectedStars.length; i++) {
-            for (let j = i + 1; j < selectedStars.length; j++) {
-                const star1 = selectedStars[i].star;
-                const star2 = selectedStars[j].star;
-                
-                const dx = star1.x - star2.x;
-                const dy = star1.y - star2.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 150) {
-                    const opacity = Math.max(0, 1 - (distance / 150)) * 0.6;
-                    
-                    this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.moveTo(star1.x, star1.y);
-                    this.ctx.lineTo(star2.x, star2.y);
-                    this.ctx.stroke();
-                }
-            }
+        // Draw a single line connecting the stars in order of distance
+        for (let i = 0; i < selectedStars.length - 1; i++) {
+            const star1 = selectedStars[i].star;
+            const star2 = selectedStars[i + 1].star;
             
-            // Also connect each star to the cursor position for a more dynamic effect
-            const star = selectedStars[i].star;
-            const distanceToCursor = selectedStars[i].distance;
-            const opacity = Math.max(0, 1 - (distanceToCursor / cursorRadius)) * 0.3;
+            const opacity = Math.max(0, 1 - (selectedStars[i].distance / cursorRadius)) * 0.5;
             
-            if (opacity > 0.1) {
-                this.ctx.beginPath();
-                this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                this.ctx.lineWidth = 0.5;
-                this.ctx.moveTo(star.x, star.y);
-                this.ctx.lineTo(this.mouse.x, this.mouse.y);
-                this.ctx.stroke();
-            }
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.moveTo(star1.x, star1.y);
+            this.ctx.lineTo(star2.x, star2.y);
+            this.ctx.stroke();
+        }
+        
+        // Connect the first star to the cursor
+        if (selectedStars.length > 0) {
+            const firstStar = selectedStars[0].star;
+            const opacity = Math.max(0, 1 - (selectedStars[0].distance / cursorRadius)) * 0.3;
+            
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            this.ctx.lineWidth = 0.8;
+            this.ctx.moveTo(this.mouse.x, this.mouse.y);
+            this.ctx.lineTo(firstStar.x, firstStar.y);
+            this.ctx.stroke();
         }
     }
 }
@@ -257,14 +248,6 @@ class Star {
         ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        
-        // Add slight glow for larger stars only
-        if (this.size > 1.2 && this.type === 'background') {
-            ctx.shadowBlur = 5;
-            ctx.shadowColor = `rgba(255, 255, 255, ${opacity * 0.3})`;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
     }
 }
 
