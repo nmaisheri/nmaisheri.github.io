@@ -4,35 +4,39 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
     font-family: 'Arial', sans-serif;
     background-color: #0a0a0a;
     color: #ffffff;
     overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
 }
 
 #backgroundCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -10; /* Changed from -1 to -10 to ensure it stays behind everything */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -999 !important;
+    pointer-events: none !important;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-    pointer-events: none; /* This allows mouse events to pass through to content below */
 }
 
-/* Ensure all content has proper z-index layering */
+body {
+    position: relative;
+    z-index: 1;
+}
+
 header {
-    background: rgba(53, 66, 74, 0.85); /* Slightly more transparent */
+    background: rgba(53, 66, 74, 0.85);
     backdrop-filter: blur(10px);
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
     position: relative;
-    z-index: 100; /* High z-index to stay on top */
+    z-index: 1000;
+    width: 100%;
 }
 
 header nav ul {
@@ -50,6 +54,8 @@ header nav a {
     border-radius: 25px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1001;
 }
 
 header nav a:hover {
@@ -61,9 +67,9 @@ h1 {
     margin: 0;
     font-size: 3em;
     font-weight: 300;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     position: relative;
-    z-index: 101;
+    z-index: 1001;
 }
 
 h2 {
@@ -71,61 +77,65 @@ h2 {
     margin: 40px 0 20px;
     text-align: center;
     color: #64ffda;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     position: relative;
-    z-index: 101;
+    z-index: 1001;
 }
 
 main {
     position: relative;
-    z-index: 50; /* Ensure main content is above canvas */
+    z-index: 100;
     padding: 60px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 section {
     margin: 80px 0;
     padding: 40px;
-    background: rgba(255, 255, 255, 0.08); /* Slightly more opaque */
+    background: rgba(20, 30, 40, 0.9) !important;
     backdrop-filter: blur(15px);
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     position: relative;
-    z-index: 51;
+    z-index: 101;
 }
 
 p {
     line-height: 1.8;
     font-size: 1.1em;
     text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     position: relative;
-    z-index: 52;
+    z-index: 102;
 }
 
 .project {
-    background: rgba(255, 255, 255, 0.12); /* More opaque for better readability */
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(30, 40, 50, 0.95) !important;
+    border: 1px solid rgba(100, 255, 218, 0.4);
     margin: 30px 0;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     position: relative;
-    z-index: 53;
+    z-index: 103;
 }
 
 .project:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.2);
-    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+    background: rgba(40, 50, 60, 0.95) !important;
 }
 
 .project h3 {
     margin: 0 0 15px 0;
     color: #64ffda;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     position: relative;
-    z-index: 54;
+    z-index: 104;
 }
 
 .project a {
@@ -139,7 +149,8 @@ p {
     display: inline-block;
     margin-top: 10px;
     position: relative;
-    z-index: 55;
+    z-index: 105;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .project a:hover {
@@ -151,27 +162,29 @@ p {
     margin-top: 30px;
     text-align: left;
     position: relative;
-    z-index: 52;
+    z-index: 102;
 }
 
 .skills h3 {
     color: #64ffda;
     margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 footer {
     text-align: center;
     padding: 40px 0;
-    background: rgba(53, 66, 74, 0.85);
+    background: rgba(53, 66, 74, 0.95);
     backdrop-filter: blur(10px);
     color: #ffffff;
     position: relative;
-    z-index: 100;
+    z-index: 1000;
+    margin-top: 100px;
 }
 
-/* Text shadow for better readability over the animated background */
-h1, h2, h3, p, a {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+/* Make sure all text is readable */
+h1, h2, h3, h4, h5, h6, p, a, span, div {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 768px) {
