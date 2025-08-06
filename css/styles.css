@@ -103,22 +103,13 @@ header nav a:hover::after {
 }
 
 header nav a:hover {
-    color: #ffffff !important; /* Force white text on hover */
+    color: #ffffff !important; /* Keep white text on hover */
     transform: translateY(-2px);
-    background: rgba(0, 0, 0, 0.3) !important; /* Add subtle dark background for contrast */
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Add white glow for better visibility */
-}
-
-/* Additional hover state for better visibility */
-header nav a:hover {
-    color: #ffffff !important;
-    background: rgba(0, 0, 0, 0.4) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    transform: translateY(-2px);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    background: transparent !important; /* Force no background */
+    border: none !important; /* Force no border */
+    box-shadow: none !important; /* Remove any shadow */
+    text-shadow: none !important; /* Remove text glow */
+    backdrop-filter: none !important; /* Remove backdrop filter */
 }
 
 h1 {
