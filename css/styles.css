@@ -70,7 +70,7 @@ header nav ul {
 header nav a {
     color: #ffffff; /* Keep white for better readability */
     text-decoration: none;
-    padding: 15px 0; /* Vertical padding only */
+    padding: 15px 20px; /* Add horizontal padding for better hover area */
     position: relative;
     font-size: 1.1em;
     font-weight: 300;
@@ -82,6 +82,7 @@ header nav a {
     backdrop-filter: none;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
+    z-index: 1002; /* Ensure nav is above everything */
 }
 
 /* Add elegant underline effect */
@@ -102,9 +103,22 @@ header nav a:hover::after {
 }
 
 header nav a:hover {
-    color: #ffffff; /* Keep white on hover for readability */
+    color: #ffffff !important; /* Force white text on hover */
     transform: translateY(-2px);
-    background: transparent !important; /* Ensure hover doesn't add background */
+    background: rgba(0, 0, 0, 0.3) !important; /* Add subtle dark background for contrast */
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Add white glow for better visibility */
+}
+
+/* Additional hover state for better visibility */
+header nav a:hover {
+    color: #ffffff !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
 h1 {
