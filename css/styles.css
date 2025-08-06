@@ -68,7 +68,7 @@ header nav ul {
 }
 
 header nav a {
-    color: #ffe4f2;
+    color: #ffffff; /* Keep white for better readability */
     text-decoration: none;
     padding: 15px 0; /* Vertical padding only */
     position: relative;
@@ -102,7 +102,7 @@ header nav a:hover::after {
 }
 
 header nav a:hover {
-    color: #e54ed0;
+    color: #ffffff; /* Keep white on hover for readability */
     transform: translateY(-2px);
     background: transparent !important; /* Ensure hover doesn't add background */
 }

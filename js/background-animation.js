@@ -12,6 +12,7 @@ class ParticleSystem {
         this.mouse = { x: 0, y: 0, prevX: 0, prevY: 0 };
         this.trailParticles = [];
         this.constellationLines = [];
+        this.isOverNavigation = false; // Track if cursor is over navigation
         
         this.canvas.style.pointerEvents = 'none';
         
@@ -29,25 +30,38 @@ class ParticleSystem {
     bindEvents() {
         window.addEventListener('resize', () => this.resize());
         
+        // Add event listeners to detect when mouse is over navigation
+        const navLinks = document.querySelectorAll('header nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                this.isOverNavigation = true;
+            });
+            link.addEventListener('mouseleave', () => {
+                this.isOverNavigation = false;
+            });
+        });
+        
         document.addEventListener('mousemove', (e) => {
             this.mouse.prevX = this.mouse.x;
             this.mouse.prevY = this.mouse.y;
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
             
-            // Create colorful stardust trail
-            const distance = Math.sqrt(
-                Math.pow(this.mouse.x - this.mouse.prevX, 2) + 
-                Math.pow(this.mouse.y - this.mouse.prevY, 2)
-            );
-            
-            if (distance > 5) {
-                for (let i = 0; i < 1; i++) {
-                    this.trailParticles.push(new Star(
-                        this.mouse.x + (Math.random() - 0.5) * 10,
-                        this.mouse.y + (Math.random() - 0.5) * 10,
-                        'trail'
-                    ));
+            // Only create trail if not over navigation
+            if (!this.isOverNavigation) {
+                const distance = Math.sqrt(
+                    Math.pow(this.mouse.x - this.mouse.prevX, 2) + 
+                    Math.pow(this.mouse.y - this.mouse.prevY, 2)
+                );
+                
+                if (distance > 5) {
+                    for (let i = 0; i < 1; i++) {
+                        this.trailParticles.push(new Star(
+                            this.mouse.x + (Math.random() - 0.5) * 10,
+                            this.mouse.y + (Math.random() - 0.5) * 10,
+                            'trail'
+                        ));
+                    }
                 }
             }
         });
@@ -112,8 +126,10 @@ class ParticleSystem {
             }
         });
         
-        // Draw simple constellation line
-        this.drawConstellationLines();
+        // Only draw constellation lines if not over navigation
+        if (!this.isOverNavigation) {
+            this.drawConstellationLines();
+        }
         
         // Maintain star count
         while (this.stars.length < Math.floor((this.canvas.width * this.canvas.height) / 2000)) {
