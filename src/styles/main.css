@@ -1,0 +1,218 @@
+/* Main styles using CSS variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font-family);
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+#backgroundCanvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -999 !important;
+    pointer-events: none !important;
+    background: #DAD7CD;
+}
+
+body {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+/* Header styles */
+@keyframes headerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    background: transparent !important;
+    color: var(--color-primary-darker);
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    border: none;
+    animation: headerFadeIn 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+    padding: 0 40px;
+}
+
+header nav a {
+    color: var(--color-primary-darker);
+    text-decoration: none;
+    padding: 15px 20px;
+    position: relative;
+    font-size: var(--font-size-lg);
+    font-weight: 300;
+    letter-spacing: 1px;
+    transition: var(--transition-normal);
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0;
+    backdrop-filter: none;
+    font-family: var(--font-family);
+    z-index: 1002;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 8px;
+    left: 50%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    transition: var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+header nav a:hover {
+    color: var(--color-primary) !important;
+    transform: translateY(-2px);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+h1 {
+    margin: 0;
+    font-size: var(--font-size-4xl);
+    font-weight: 100;
+    position: relative;
+    z-index: 1001;
+    letter-spacing: 3px;
+    color: var(--color-primary-darker);
+    font-family: var(--font-family);
+}
+
+header p {
+    color: var(--color-primary-dark);
+    font-size: var(--font-size-xl);
+    margin-top: 10px;
+    opacity: 0.9;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family);
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+    margin: 40px 0 20px;
+    text-align: center;
+    color: var(--color-primary-darker);
+    position: relative;
+    z-index: 1001;
+    font-weight: 200;
+    letter-spacing: 2px;
+    font-family: var(--font-family);
+}
+
+h3 {
+    font-family: var(--font-family);
+    font-weight: 400;
+}
+
+main {
+    position: relative;
+    z-index: 100;
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+section {
+    margin: 120px 0;
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    background: var(--bg-section) !important;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-light) !important;
+    position: relative;
+    z-index: 101;
+    backdrop-filter: blur(15px);
+    box-shadow: var(--shadow-none) !important;
+}
+
+p {
+    line-height: 1.8;
+    font-size: var(--font-size-xl);
+    text-align: center;
+    position: relative;
+    z-index: 102;
+    color: var(--color-primary-dark);
+    font-weight: 300;
+    font-family: var(--font-family);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-primary-dark);
+    background: transparent;
+    font-family: var(--font-family);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        gap: 25px;
+        padding: 0 20px;
+    }
+    
+    header nav a {
+        font-size: var(--font-size-base);
+        padding: 12px 0;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    main {
+        padding: 40px 15px;
+    }
+    
+    section {
+        margin: 60px 0;
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+}

@@ -1,4 +1,4 @@
-/* Contact page specific styles */
+/* Contact page specific styles with green color scheme */
 
 .contact-methods {
     display: grid;
@@ -8,41 +8,44 @@
 }
 
 .contact-card {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(229, 78, 208, 0.3);
+    background: rgba(163, 177, 138, 0.1) !important;
+    border: 1px solid rgba(88, 129, 87, 0.3) !important;
     border-radius: 15px;
     padding: 30px;
     text-align: center;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    box-shadow: none !important;
 }
 
 .contact-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(229, 78, 208, 0.3);
-    border-color: rgba(229, 78, 208, 0.5);
+    box-shadow: none !important;
+    border-color: rgba(88, 129, 87, 0.5) !important;
 }
 
 .contact-card i {
     font-size: 2.5em;
-    color: #e54ed0;
+    color: #588157 !important;
     margin-bottom: 20px;
 }
 
 .contact-card h3 {
-    color: #ffe4f2;
+    color: #344E41 !important;
     margin-bottom: 15px;
-    font-weight: 400;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
 }
 
 .contact-card a {
-    color: #ffe4f2;
+    color: #3A5A40 !important;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-family: "Montserrat", sans-serif;
 }
 
 .contact-card a:hover {
-    color: #e54ed0;
+    color: #588157 !important;
 }
 
 .social-links {
@@ -56,119 +59,96 @@
 .social-link {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 15px 25px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(229, 78, 208, 0.3);
-    border-radius: 50px;
-    color: #ffe4f2;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 25px;
     text-decoration: none;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    background: rgba(163, 177, 138, 0.1) !important;
+    border: 1px solid rgba(88, 129, 87, 0.3) !important;
+    color: #3A5A40 !important;
     font-family: "Montserrat", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
+    box-shadow: none !important;
 }
 
 .social-link i {
-    font-size: 1.2em;
+    color: #588157 !important;
 }
 
 .social-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(229, 78, 208, 0.3);
-}
-
-.social-link.linkedin:hover {
-    background: #0077b5;
-    border-color: #0077b5;
-    color: white;
-}
-
-.social-link.github:hover {
-    background: #333;
-    border-color: #333;
-    color: white;
-}
-
-.social-link.instagram:hover {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    border-color: #e6683c;
-    color: white;
-}
-
-.social-link.twitter:hover {
-    background: #1da1f2;
-    border-color: #1da1f2;
-    color: white;
-}
-
-.social-link.email:hover {
-    background: #e54ed0;
-    border-color: #e54ed0;
-    color: white;
+    background: rgba(88, 129, 87, 0.2) !important;
+    border-color: rgba(88, 129, 87, 0.5) !important;
+    transform: translateY(-2px);
+    box-shadow: none !important;
 }
 
 .resume-card {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(229, 78, 208, 0.3);
+    background: rgba(163, 177, 138, 0.1) !important;
+    border: 1px solid rgba(88, 129, 87, 0.3) !important;
     border-radius: 15px;
     padding: 30px;
-    backdrop-filter: blur(10px);
-    margin-top: 30px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 30px;
     flex-wrap: wrap;
-    gap: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: none !important;
 }
 
 .resume-preview {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex: 1;
 }
 
 .resume-preview i {
     font-size: 3em;
-    color: #e54ed0;
+    color: #588157 !important;
 }
 
 .resume-info h3 {
-    color: #ffe4f2;
-    margin-bottom: 5px;
-    font-weight: 400;
+    color: #344E41 !important;
+    margin: 0 0 8px 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
 }
 
 .resume-info p {
-    color: #ffe4f2;
-    opacity: 0.8;
-    margin: 0;
-    font-size: 1em;
+    color: #3A5A40 !important;
+    margin: 0 0 5px 0;
+    font-family: "Montserrat", sans-serif;
 }
 
 .file-info {
-    font-size: 0.9em !important;
-    opacity: 0.6 !important;
+    opacity: 0.8;
+    font-size: 0.9em;
+    font-style: italic;
 }
 
 .download-btn {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 15px 30px;
-    background: #e54ed0;
-    color: white;
+    padding: 12px 24px;
+    background: #588157 !important;
+    color: white !important;
     text-decoration: none;
-    border-radius: 30px;
-    font-weight: 500;
+    border-radius: 25px;
     transition: all 0.3s ease;
     font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    border: 1px solid #588157 !important;
+    box-shadow: none !important;
 }
 
 .download-btn:hover {
-    background: #9f45b0;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(229, 78, 208, 0.4);
+    background: #3A5A40 !important;
+    border-color: #3A5A40 !important;
+    transform: translateY(-2px);
+    box-shadow: none !important;
 }
 
 .contact-form {
@@ -241,6 +221,7 @@
 @media (max-width: 768px) {
     .contact-methods {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .social-links {
@@ -249,11 +230,6 @@
     }
     
     .resume-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .resume-preview {
         flex-direction: column;
         text-align: center;
     }

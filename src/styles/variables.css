@@ -1,0 +1,50 @@
+:root {
+    /* Green Color Palette */
+    --color-primary: #588157;
+    --color-primary-light: #A3B18A;
+    --color-primary-dark: #3A5A40;
+    --color-primary-darker: #344E41;
+    
+    /* Background Colors */
+    --bg-card: rgba(163, 177, 138, 0.1);
+    --bg-section: rgba(163, 177, 138, 0.08);
+    --bg-hover: rgba(88, 129, 87, 0.2);
+    
+    /* Border Colors */
+    --border-light: rgba(88, 129, 87, 0.3);
+    --border-medium: rgba(88, 129, 87, 0.4);
+    --border-dark: rgba(88, 129, 87, 0.5);
+    
+    /* Typography */
+    --font-family: "Montserrat", sans-serif;
+    --font-size-xs: 0.8em;
+    --font-size-sm: 0.9em;
+    --font-size-base: 1em;
+    --font-size-lg: 1.1em;
+    --font-size-xl: 1.2em;
+    --font-size-2xl: 1.4em;
+    --font-size-3xl: 2em;
+    --font-size-4xl: 2.5em;
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    --spacing-2xl: 60px;
+    
+    /* Borders & Radius */
+    --border-radius-sm: 12px;
+    --border-radius-md: 15px;
+    --border-radius-lg: 20px;
+    --border-radius-pill: 25px;
+    
+    /* Shadows (all none for your design) */
+    --shadow-none: none;
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+}

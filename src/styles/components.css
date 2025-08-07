@@ -1,0 +1,71 @@
+/* Card Component */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    transition: var(--transition-normal);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-none);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-dark);
+}
+
+/* Button Component */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-none);
+    border: 1px solid var(--color-primary);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+}
+
+.btn:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Section Component */
+.section {
+    margin: 120px 0;
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    background: var(--bg-section);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(15px);
+    box-shadow: var(--shadow-none);
+}
+
+/* Tech Tag Component */
+.tech-tag {
+    background: var(--bg-hover);
+    color: var(--color-primary-darker);
+    padding: 4px var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-xs);
+    font-family: var(--font-family);
+    border: 1px solid var(--border-medium);
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-none);
+}
