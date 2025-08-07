@@ -10,6 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
@@ -31,39 +36,11 @@
     <main>
         <section id="introduction">
             <h2>About Me</h2>
-            <p>Currently studying computer engineering at the University of Maryland, College Park. Take a look at some my work!</p>
+            <p>Sophomore pursuing computer engineering at the University of Maryland, College Park. Take a look at some my work!</p>
         </section>
         
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <p>Here are some of the projects I've worked on:</p>
-            
-            <div class="project">
-                <h3>Interactive Website Portfolio</h3>
-                <p>A modern, responsive portfolio website with interactive particle animations and smooth transitions to provide an engaging user experience.</p>
-                <p>Built entirely with HTML, CSS, and JavaScript, this project showcases my skills in front-end development and design.</p>
-                <a href="https://nmaisheri.github.io/" target="_blank">View Live</a>
-                <a href="https://github.com/nmaisheri/nmaisheri.github.io" target="_blank">View Code</a>
-            </div>
-            
-            <div class="project">
-                <h3>Autonomous Obstacle-Traversing Vehicle</h3>
-                <p>Co-Lead a team of 8 to design and build a self-navigating vehicle. Integrated sensors, dual motors, and servo arms with custom firmware. Presented the final system and design tradeoffs in a 15-minute technical showcase to an audience of over 200.</p>
-                <p>Technologies used: Arduino, Autodesk, C++, 3D Printing</p>
-            </div>
-
-            <div class="project">
-                <h3>Java Data Structures & Algorithms Suite</h3>
-                <p>A comprehensive suite of data structures and algorithms implemented in Java, designed to help students understand core concepts through interactive visualizations and hands-on coding exercises.</p>
-                <p>Utilizes JavaFX for the front-end and a custom-built server for handling user interactions and data storage.</p>
-            </div>
-
-            <div class="project">
-                <h3>Test Execution Monitor</h3>
-                <p>Developed a real-time pytest automation dashboard using Python, HTML, CSS, and JavaScript to monitor 10,000+ test executions with live status updates and marker-based filtering</p>
-                <p>Implemented interactive error visualization, responsive UI design, and modular code architecture with separated CSS/JavaScript files for enhanced maintainability and scalability.</p>
-            </div>
-        </section>
+        <!-- Replace the entire projects section with this React container -->
+        <div id="projects-container"></div>
         
         <section id="experience">
             <h2>Professional Experience</h2>
@@ -73,52 +50,36 @@
                 <div class="experience-header">
                     <h3>Software Engineering Intern</h3>
                     <div class="company-info">
-                        <span class="company">Company Name</span>
-                        <span class="duration">Summer 2024</span>
+                        <span class="company">Sparksoft Corporation</span>
+                        <span class="duration">June 2025 - August 2025</span>
+                        <span class="location">Columbia, MD</span>
                     </div>
                 </div>
                 <div class="experience-description">
-                    <p>Developed and maintained web applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.</p>
+                    <p>Designed and led development of high-performance automation solutions. Focused on test infrastructure, framework development, and codebase optimization.</p>
                     <ul class="achievements">
-                        <li>Built responsive user interfaces serving 10,000+ users</li>
-                        <li>Optimized database queries reducing load times by 40%</li>
-                        <li>Implemented automated testing increasing code coverage to 95%</li>
+                        <li>Designed and implemented a high-performance test automation dashboard capable of processing 10,000+ test cases with real-time status visualization</li>
+                        <li>Developed a modular Pytest framework with intelligent test randomization, marker-based filtering, and dynamic execution timing to enhance test flexibility</li>
+                        <li>Led a full codebase reorganization focused on modularity and long-term maintainability, significantly improving scalability and developer productivity</li>
                     </ul>
                 </div>
             </div>
             
             <div class="experience-item">
                 <div class="experience-header">
-                    <h3>Research Assistant</h3>
+                    <h3>Student IT Worker</h3>
                     <div class="company-info">
-                        <span class="company">University of Maryland</span>
-                        <span class="duration">Spring 2024 - Present</span>
+                        <span class="company">University of Maryland School of Public Health</span>
+                        <span class="duration">Feb 2025 - Present</span>
+                        <span class="location">College Park, MD</span>
                     </div>
                 </div>
                 <div class="experience-description">
-                    <p>Conducting research in computer engineering under faculty supervision, focusing on innovative solutions in embedded systems.</p>
+                    <p>Providing comprehensive IT and audiovisual support for academic operations. Managing technical infrastructure for classes, events, and administrative functions.</p>
                     <ul class="achievements">
-                        <li>Designed and implemented testing protocols for embedded systems</li>
-                        <li>Collaborated with graduate students on research publications</li>
-                        <li>Presented findings at university research symposium</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="experience-header">
-                    <h3>Teaching Assistant</h3>
-                    <div class="company-info">
-                        <span class="company">University of Maryland</span>
-                        <span class="duration">Fall 2023 - Spring 2024</span>
-                    </div>
-                </div>
-                <div class="experience-description">
-                    <p>Assisted students in computer science courses, providing guidance on programming concepts and project development.</p>
-                    <ul class="achievements">
-                        <li>Mentored 50+ students in programming fundamentals</li>
-                        <li>Conducted weekly lab sessions and office hours</li>
-                        <li>Improved student comprehension rates by 25%</li>
+                        <li>Set up and troubleshoot AV and IT support for classes and in-house events, handling tickets via Jira</li>
+                        <li>Assist professors, guests, and department heads with resolving computer issues efficiently and effectively</li>
+                        <li>Set up, maintain, and test audiovisual and IT systems for classes, seminars, and live events</li>
                     </ul>
                 </div>
             </div>
@@ -128,15 +89,15 @@
                 <div class="skills-grid">
                     <div class="skill-category">
                         <h4>Programming Languages</h4>
-                        <p>Python, Java, JavaScript, C++, HTML/CSS</p>
+                        <p>Python, Java, JavaScript, C++, HTML/CSS, Swift</p>
                     </div>
                     <div class="skill-category">
                         <h4>Frameworks & Tools</h4>
-                        <p>React, Node.js, Git, Docker, Jenkins</p>
+                        <p>SwiftUI, Git, Jira, Arduino</p>
                     </div>
                     <div class="skill-category">
                         <h4>Technologies</h4>
-                        <p>AWS, MongoDB, PostgreSQL, Arduino</p>
+                        <p>AWS, Azure, Affluence</p>
                     </div>
                 </div>
             </div>
@@ -153,5 +114,6 @@
     
     <script src="js/main.js"></script>
     <script src="js/background-animation.js"></script>
+    <script type="text/babel" src="js/ProjectsComponent.js"></script>
 </body>
 </html>
