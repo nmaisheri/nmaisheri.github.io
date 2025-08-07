@@ -308,24 +308,149 @@ p {
     font-size: 1.1em;
 }
 
-footer {
-    text-align: center;
-    padding: 60px 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
-    color: #ffe4f2;
+/* Experience section styles */
+.experience-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(159, 69, 176, 0.3);
+    margin: 30px 0;
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
     position: relative;
-    z-index: 1000;
-    margin-top: 100px;
+    z-index: 103;
+    backdrop-filter: blur(10px);
+}
+
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(68, 0, 139, 0.1);
+    border-radius: 15px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(229, 78, 208, 0.3);
+    border-color: rgba(229, 78, 208, 0.5);
+}
+
+.experience-item:hover::before {
+    background: rgba(159, 69, 176, 0.15);
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.experience-header h3 {
+    color: #ffe4f2;
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.company {
+    color: #e54ed0;
+    font-weight: 500;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+}
+
+.duration {
+    color: #ffe4f2;
+    opacity: 0.8;
+    font-size: 0.9em;
+    margin-top: 2px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.experience-description p {
+    text-align: left;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.achievements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.achievements li {
+    color: #ffe4f2;
+    margin: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.achievements li::before {
+    content: '▸';
+    color: #e54ed0;
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.skill-category {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(229, 78, 208, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.skill-category h4 {
+    color: #e54ed0;
+    margin: 0 0 10px 0;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+}
+
+.skill-category p {
+    margin: 0;
+    text-align: left;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.resume-download {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
     border-top: 1px solid rgba(229, 78, 208, 0.2);
 }
 
-footer p {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 1em;
+.resume-download p {
+    margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -355,5 +480,19 @@ footer p {
     section {
         margin: 60px 0;
         padding: 30px 20px;
+    }
+
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .company-info {
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 }
