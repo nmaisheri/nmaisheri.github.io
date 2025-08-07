@@ -21,9 +21,7 @@ html, body {
     height: 100vh !important;
     z-index: -999 !important;
     pointer-events: none !important;
-    background: radial-gradient(ellipse at 30% 20%, #e54ed0 0%, #9f45b0 25%, #44008b 50%, #00076f 75%, #000000 100%),
-                linear-gradient(45deg, #000000 0%, #00076f 30%, #44008b 60%, #9f45b0 85%, #e54ed0 100%);
-    background-blend-mode: multiply;
+    background: #DAD7CD; /* Fallback color */
 }
 
 body {
@@ -68,7 +66,7 @@ header nav ul {
 }
 
 header nav a {
-    color: #ffffff; /* Keep white for better readability */
+    color: #344E41; /* Dark green for navigation */
     text-decoration: none;
     padding: 15px 20px; /* Add horizontal padding for better hover area */
     position: relative;
@@ -93,7 +91,7 @@ header nav a::after {
     height: 2px;
     bottom: 8px;
     left: 50%;
-    background: linear-gradient(90deg, #e54ed0, #ffe4f2);
+    background: linear-gradient(90deg, #588157, #3A5A40);
     transition: all 0.4s ease;
     transform: translateX(-50%);
 }
@@ -103,7 +101,7 @@ header nav a:hover::after {
 }
 
 header nav a:hover {
-    color: #ffffff !important; /* Keep white text on hover */
+    color: #588157 !important; /* Medium-dark green on hover */
     transform: translateY(-2px);
     background: transparent !important; /* Force no background */
     border: none !important; /* Force no border */
@@ -119,7 +117,7 @@ h1 {
     position: relative;
     z-index: 1001;
     letter-spacing: 3px;
-    color: #ffe4f2;
+    color: #344E41; /* Dark green for better contrast */
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -127,10 +125,10 @@ h1 {
 
 /* Add subtitle styling */
 header p {
-    color: #ffe4f2;
+    color: #3A5A40; /* Medium green for subtitle */
     font-size: 1.2em;
     margin-top: 10px;
-    opacity: 0.8;
+    opacity: 0.9;
     font-weight: 300;
     letter-spacing: 0.5px;
     font-family: "Montserrat", sans-serif;
@@ -142,7 +140,7 @@ h2 {
     font-size: 2.5em;
     margin: 40px 0 20px;
     text-align: center;
-    color: #ffe4f2;
+    color: #344E41; /* Dark green for headings */
     position: relative;
     z-index: 1001;
     font-weight: 200;
@@ -197,7 +195,7 @@ p {
     text-align: center;
     position: relative;
     z-index: 102;
-    color: #ffe4f2;
+    color: #3A5A40; /* Medium green for body text */
     font-weight: 300;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -347,10 +345,11 @@ p {
 .experience-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center */
     margin-bottom: 15px;
     flex-wrap: wrap;
     gap: 10px;
+    min-height: 40px; /* Ensure consistent height */
 }
 
 .experience-header h3 {
@@ -359,6 +358,7 @@ p {
     font-size: 1.4em;
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
+    line-height: 1.2; /* Consistent line height */
 }
 
 .company-info {
@@ -463,14 +463,15 @@ p {
     margin: 0;
 }
 
-/* Project header styling */
+/* Project header styling - Fixed alignment */
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center */
     margin-bottom: 15px;
     flex-wrap: wrap;
     gap: 15px;
+    min-height: 40px; /* Ensure consistent height */
 }
 
 .project-header h3 {
@@ -480,6 +481,10 @@ p {
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
     flex: 1;
+    line-height: 1.2; /* Consistent line height */
+    display: flex;
+    align-items: center; /* Vertically center the title text */
+    min-height: 36px; /* Match button height */
 }
 
 .project-links {
@@ -487,6 +492,7 @@ p {
     gap: 12px;
     align-items: center;
     flex-wrap: wrap;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .project-link {
@@ -498,6 +504,14 @@ p {
     transition: all 0.3s ease;
     font-family: "Montserrat", sans-serif;
     border: 1px solid;
+    white-space: nowrap; /* Prevent text wrapping */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center text horizontally */
+    height: 36px; /* Fixed height for consistency */
+    box-sizing: border-box;
+    line-height: 1; /* Remove line-height spacing */
+    vertical-align: middle; /* Additional vertical alignment */
 }
 
 .project-link.live {
@@ -532,6 +546,12 @@ p {
     font-size: 0.9em;
     font-family: "Montserrat", sans-serif;
     font-style: italic;
+    white-space: nowrap; /* Prevent text wrapping */
+    height: 36px; /* Match button height */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text horizontally */
+    line-height: 1; /* Remove line-height spacing */
 }
 
 .project-description {
@@ -616,5 +636,10 @@ p {
     .project-links {
         width: 100%;
         justify-content: flex-start;
+    }
+    
+    .project-date,
+    .project-link {
+        height: auto; /* Allow flexible height on mobile */
     }
 }
