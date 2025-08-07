@@ -1,0 +1,20 @@
+/* Only the icons you actually use - replace with your specific icons */
+.fa-github::before { content: "\f09b"; }
+.fa-linkedin::before { content: "\f08c"; }
+.fa-envelope::before { content: "\f0e0"; }
+.fa-external-link-alt::before { content: "\f35d"; }
+.fa-download::before { content: "\f019"; }
+.fa-file-pdf::before { content: "\f1c1"; }
+.fa-briefcase::before { content: "\f0b1"; }
+.fa-calendar::before { content: "\f133"; }
+.fa-map-marker-alt::before { content: "\f3c5"; }
+
+.fa, .fas, .far, .fal, .fad, .fab {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", sans-serif;
+    font-weight: 900;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
