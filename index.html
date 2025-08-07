@@ -1,192 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="src/styles/variables.css" as="style">
+    <link rel="preload" href="src/styles/main.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- React CDN - Production Version -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/utilities.css">
+    <link rel="stylesheet" href="src/styles/components.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    
+    <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nipun Maisheri - Portfolio</title>
-    
-    <!-- Preload critical fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="src/styles/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="src/styles/fonts.css"></noscript>
-    
-    <!-- Font Awesome - only load what we need -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    
-    <!-- Critical CSS inline with font fallback matching -->
-    <style>
-        /* Font fallback that matches Montserrat metrics */
-        @font-face {
-            font-family: 'Montserrat-fallback';
-            src: local('Arial');
-            size-adjust: 107%;
-            ascent-override: 92%;
-            descent-override: 22%;
-            line-gap-override: 0%;
-        }
-        
-        /* Critical above-the-fold styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { 
-            height: 100%; 
-            font-family: 'Montserrat', 'Montserrat-fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background-color: #000000; 
-            color: #ffffff; 
-            overflow-x: hidden; 
-        }
-        #backgroundCanvas {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: -999 !important;
-            pointer-events: none !important;
-            background: #DAD7CD;
-        }
-        header {
-            background: transparent !important;
-            color: #344E41;
-            padding: 40px 0;
-            text-align: center;
-            position: relative;
-            z-index: 1000;
-            width: 100%;
-            border: none;
-        }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 100;
-            position: relative;
-            z-index: 1001;
-            letter-spacing: 3px;
-            color: #344E41;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-            min-height: 1.2em;
-            line-height: 1.2;
-        }
-        header p {
-            color: #3A5A40;
-            font-size: 1.2em;
-            margin-top: 10px;
-            opacity: 0.9;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-            min-height: 1.5em;
-            line-height: 1.5;
-        }
-        header nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 30px;
-            padding: 0 40px;
-        }
-        header nav a {
-            color: #344E41;
-            text-decoration: none;
-            padding: 15px 20px;
-            position: relative;
-            font-size: 1.1em;
-            font-weight: 300;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-            min-height: 1.5em;
-            line-height: 1.5;
-        }
-        main {
-            position: relative;
-            z-index: 100;
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            min-height: 100vh;
-        }
-        section {
-            margin: 120px 0;
-            padding: 60px 40px;
-            background: rgba(163, 177, 138, 0.08) !important;
-            border-radius: 20px;
-            border: 1px solid rgba(88, 129, 87, 0.3) !important;
-            position: relative;
-            z-index: 101;
-            backdrop-filter: blur(15px);
-            box-shadow: none !important;
-        }
-        h2 {
-            font-size: 2.5em;
-            margin: 40px 0 20px;
-            text-align: center;
-            color: #344E41;
-            position: relative;
-            z-index: 1001;
-            font-weight: 200;
-            letter-spacing: 2px;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-            min-height: 1.2em;
-            line-height: 1.2;
-        }
-        p {
-            line-height: 1.8;
-            font-size: 1.2em;
-            text-align: center;
-            position: relative;
-            z-index: 102;
-            color: #3A5A40;
-            font-weight: 300;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-            min-height: 1.8em;
-        }
-        #projects-container, #experience-container {
-            min-height: 400px;
-            position: relative;
-        }
-        .loading-skeleton {
-            background: linear-gradient(90deg, rgba(163, 177, 138, 0.1) 25%, rgba(163, 177, 138, 0.2) 50%, rgba(163, 177, 138, 0.1) 75%);
-            background-size: 200% 100%;
-            animation: loading 2s infinite;
-            border-radius: 15px;
-            height: 200px;
-            margin: 20px 0;
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #3A5A40;
-            background: transparent;
-            font-family: 'Montserrat', 'Montserrat-fallback', sans-serif;
-        }
-        @media (max-width: 768px) {
-            header nav ul { flex-direction: column; gap: 25px; padding: 0 20px; }
-            header nav a { font-size: 1em; padding: 12px 0; }
-            h1 { font-size: 2em; }
-            h2 { font-size: 2em; }
-            main { padding: 40px 15px; }
-            section { margin: 60px 0; padding: 30px 20px; }
-        }
-    </style>
-    
-    <!-- Non-critical CSS - load async -->
-    <link rel="preload" href="src/styles/variables.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="src/styles/utilities.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="src/styles/components.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="src/styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="src/styles/variables.css">
-        <link rel="stylesheet" href="src/styles/utilities.css">
-        <link rel="stylesheet" href="src/styles/components.css">
-        <link rel="stylesheet" href="src/styles/main.css">
-    </noscript>
+    <meta name="description" content="Nipun Maisheri - Computer Engineering Student & Software Developer Portfolio">
+    <meta name="keywords" content="software engineer, computer engineering, portfolio, react, javascript">
+    <meta property="og:title" content="Nipun Maisheri - Portfolio">
+    <meta property="og:description" content="Computer Engineering Student & Software Developer">
+    <link rel="canonical" href="https://nmaisheri.github.io">
 </head>
 <body>
     <canvas id="backgroundCanvas"></canvas>
@@ -210,77 +56,20 @@
         </section>
         
         <!--Projects Section-->
-        <div id="projects-container">
-            <div class="loading-skeleton"></div>
-            <div class="loading-skeleton"></div>
-        </div>
+        <div id="projects-container"></div>
 
         <!--Experience Section-->
-        <div id="experience-container">
-            <div class="loading-skeleton"></div>
-            <div class="loading-skeleton"></div>
-        </div>
+        <div id="experience-container"></div>
     </main>
     
     <footer>
         <p>&copy; 2025 Nipun Maisheri. All rights reserved.</p>
     </footer>
     
-    <!-- Optimized React loading - only load when needed -->
-    <script>
-        // Load React components only when sections are visible
-        const loadComponent = (containerId, scriptSrc) => {
-            const container = document.getElementById(containerId);
-            if (container) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const script = document.createElement('script');
-                            script.type = 'text/babel';
-                            script.src = scriptSrc;
-                            document.body.appendChild(script);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                });
-                observer.observe(container);
-            }
-        };
-
-        // Load React libraries first
-        Promise.all([
-            new Promise(resolve => {
-                const react = document.createElement('script');
-                react.src = 'https://unpkg.com/react@18/umd/react.production.min.js';
-                react.onload = resolve;
-                document.head.appendChild(react);
-            }),
-            new Promise(resolve => {
-                const reactDom = document.createElement('script');
-                reactDom.src = 'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js';
-                reactDom.onload = resolve;
-                document.head.appendChild(reactDom);
-            }),
-            new Promise(resolve => {
-                const babel = document.createElement('script');
-                babel.src = 'https://unpkg.com/@babel/standalone/babel.min.js';
-                babel.onload = resolve;
-                document.head.appendChild(babel);
-            })
-        ]).then(() => {
-            // Load other scripts
-            const mainScript = document.createElement('script');
-            mainScript.src = 'src/scripts/main.js';
-            document.body.appendChild(mainScript);
-            
-            const bgScript = document.createElement('script');
-            bgScript.src = 'src/scripts/background-animation.js';
-            document.body.appendChild(bgScript);
-            
-            // Set up lazy loading for components
-            loadComponent('projects-container', 'src/components/ProjectsComponent.js');
-            loadComponent('experience-container', 'src/components/ExperienceComponent.js');
-        });
-    </script>
+    <!-- JavaScript Files -->
+    <script defer src="src/scripts/main.js"></script>
+    <script defer src="src/scripts/background-animation.js"></script>
+    <script defer type="text/babel" src="src/components/ProjectsComponent.js"></script>
+    <script defer type="text/babel" src="src/components/ExperienceComponent.js"></script>
 </body>
 </html>
