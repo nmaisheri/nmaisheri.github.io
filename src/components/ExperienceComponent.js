@@ -11,7 +11,7 @@ const ExperienceSection = () => {
             location: "Columbia, MD",
             description: "Designed and led development of high-performance automation solutions. Focused on test infrastructure, framework development, and codebase optimization.",
             achievements: [
-                "Designed and implemented a high-performance test automation dashboard capable of processing 10,000+ test cases with real-time status visualization",
+                "Implemented a high-performance test automation dashboard capable of processing 10,000+ test cases with real-time status visualization",
                 "Developed a modular Pytest framework with intelligent test randomization, marker-based filtering, and dynamic execution timing to enhance test flexibility",
                 "Led a full codebase reorganization focused on modularity and long-term maintainability, significantly improving scalability and developer productivity"
             ]
@@ -27,6 +27,19 @@ const ExperienceSection = () => {
                 "Set up and troubleshoot AV and IT support for classes and in-house events, handling tickets via Jira",
                 "Assist professors, guests, and department heads with resolving computer issues efficiently and effectively",
                 "Set up, maintain, and test audiovisual and IT systems for classes, seminars, and live events"
+            ]
+        },
+        {
+            id: 3,
+            title: "Seasonal Production Warehouse Technician",
+            company: "Daly Computers",
+            duration: "June 2023 - August 2023",
+            location: "Frederick, MD",
+            description: "Managed logistics and technical operations in a high-volume production environment. Focused on hardware assembly, testing, and quality assurance.",
+            achievements: [
+                "Configured, imaged, and tested hardware and software components for K-12 schools",
+                "Organized and palletized 100s of customer and individual orders",
+                "Performed quality assurance and quality control audits"
             ]
         }
     ]);
@@ -298,7 +311,7 @@ const ExperienceSection = () => {
         
         // Resume download
         React.createElement('div', { 
-            className: 'resume-download',
+            className: 'contact-redirect',
             style: {
                 textAlign: 'center',
                 marginTop: '40px',
@@ -318,10 +331,9 @@ const ExperienceSection = () => {
                     margin: '0'
                 } 
             },
-                'Want to learn more about my background? ',
+                'Interested in learning more? ',
                 React.createElement('a', {
-                    href: 'assets/resume.pdf',
-                    target: '_blank',
+                    href: 'pages/contact.html',
                     style: { 
                         color: '#588157',
                         textDecoration: 'none',
@@ -338,13 +350,18 @@ const ExperienceSection = () => {
                         fontFamily: '"Montserrat", sans-serif',
                         boxShadow: 'none'
                     }
-                }, 'Download my resume')
+                }, "Let's connect")
             )
         )
     );
 };
 
 // Use createRoot instead of ReactDOM.render
-const container = document.getElementById('experience-container');
-const root = createRoot(container);
-root.render(React.createElement(ExperienceSection));
+const container = document.getElementById('experience');
+if (container) {
+    const root = createRoot(container);
+    root.render(React.createElement(ExperienceSection));
+    console.log('Experience component rendered');
+} else {
+    console.error('Experience container not found');
+}

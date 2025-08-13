@@ -6,9 +6,10 @@ const ProjectsSection = () => {
         {
             id: 1,
             title: "Interactive Website Portfolio",
+            date: "August 2025",
             description: "A modern, responsive portfolio website with interactive particle animations and smooth transitions to provide an engaging user experience.",
             details: "Built entirely with HTML, CSS, JavaScript, and React, this project showcases my skills in front-end development and design.",
-            technologies: ["HTML/CSS", "JavaScript", "Canvas API", "Responsive Design", "React"],
+            technologies: ["HTML/CSS", "JavaScript", "Canvas API", "React"],
             links: {
                 live: "https://nmaisheri.github.io/",
                 code: "https://github.com/nmaisheri/nmaisheri.github.io"
@@ -16,29 +17,41 @@ const ProjectsSection = () => {
         },
         {
             id: 2,
+            title: "Test Execution Monitor",
+            date: "August 2025",
+            description: "Developed a real-time pytest automation dashboard using Python, HTML, CSS, and JavaScript to monitor 10,000+ test executions with live status updates and marker-based filtering.",
+            details: "Implemented interactive error visualization, responsive UI design, and modular code architecture with separated CSS/JavaScript files for enhanced maintainability and scalability.",
+            technologies: ["Python", "HTML/CSS", "JavaScript"],
+            links: {
+                code: "https://github.com/nmaisheri/Test_Execution_Report"
+            }
+        },
+        {
+            id: 3,
             title: "Autonomous Obstacle-Traversing Vehicle",
+            date: "April 2025",
             description: "Co-Lead a team of 8 to design and build a self-navigating vehicle. Integrated sensors, dual motors, and servo arms with custom firmware.",
             details: "Presented the final system and design tradeoffs in a 15-minute technical showcase to an audience of over 200.",
             technologies: ["Arduino", "C++", "Autodesk", "3D Printing", "Sensor Integration"],
             type: "Academic Project"
         },
         {
-            id: 3,
+            id: 4,
             title: "Java Data Structures & Algorithms Suite",
+            date: "March 2025",
             description: "A comprehensive suite of data structures and algorithms implemented in Java, designed to help students understand core concepts through interactive visualizations and hands-on coding exercises.",
             details: "Utilizes JavaFX for the front-end and a custom-built server for handling user interactions and data storage.",
             technologies: ["Java", "JavaFX", "Data Structures", "Algorithms", "Interactive UI"],
             type: "Academic Project"
         },
         {
-            id: 4,
-            title: "Test Execution Monitor",
-            description: "Developed a real-time pytest automation dashboard using Python, HTML, CSS, and JavaScript to monitor 10,000+ test executions with live status updates and marker-based filtering.",
-            details: "Implemented interactive error visualization, responsive UI design, and modular code architecture with separated CSS/JavaScript files for enhanced maintainability and scalability.",
-            technologies: ["Python", "HTML/CSS", "JavaScript", "Real-time Dashboard"],
-            links: {
-                code: "https://github.com/nmaisheri/Test_Execution_Report"
-            }
+            id: 5,
+            title: "Smart Clipboard Manager",
+            date: "In Progress",
+            description: "Built for Mac using Swift and SwiftUI, this clipboard manager allows users to store and manage multiple clipboard items efficiently.",
+            details: "Features include search functionality, categorization of clipboard items, summation of text items and images using AI integration, designed to boost productivity.",
+            technologies: ["Swift", "SwiftUI", "ChatGPT API"],
+            type: "Personal Project"
         }
     ]);
 
@@ -53,7 +66,7 @@ const ProjectsSection = () => {
                 margin: '40px 0',
                 transition: 'all 0.3s ease',
                 backdropFilter: 'blur(10px)',
-                boxShadow: 'none' // Remove shadow
+                boxShadow: 'none'
             }
         },
             React.createElement('div', { 
@@ -61,24 +74,51 @@ const ProjectsSection = () => {
                 style: {
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'center',
+                    alignItems: 'flex-start',
                     marginBottom: '15px',
                     flexWrap: 'wrap',
-                    gap: '15px',
-                    minHeight: '40px'
+                    gap: '15px'
                 }
             },
-                React.createElement('h3', { 
-                    style: { 
-                        color: '#344E41', 
-                        margin: '0',
-                        fontSize: '1.4em',
-                        fontWeight: '500',
-                        fontFamily: '"Montserrat", sans-serif',
+                React.createElement('div', {
+                    className: 'project-title-section',
+                    style: {
                         flex: '1',
-                        lineHeight: '1.2'
-                    } 
-                }, project.title),
+                        minWidth: '250px'
+                    }
+                },
+                    React.createElement('h3', { 
+                        style: { 
+                            color: '#344E41', 
+                            margin: '0 0 8px 0',
+                            fontSize: '1.4em',
+                            fontWeight: '500',
+                            fontFamily: '"Montserrat", sans-serif',
+                            lineHeight: '1.2'
+                        } 
+                    }, project.title),
+                    React.createElement('div', {
+                        className: 'project-date',
+                        style: {
+                            color: '#588157',
+                            fontSize: '0.95em',
+                            fontFamily: '"Montserrat", sans-serif',
+                            fontWeight: '400',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }
+                    },
+                        React.createElement('i', {
+                            className: 'fa fa-calendar',
+                            style: {
+                                fontSize: '0.9em',
+                                opacity: '0.8'
+                            }
+                        }),
+                        project.date
+                    )
+                ),
                 React.createElement('div', { 
                     className: 'project-links',
                     style: {
@@ -110,7 +150,7 @@ const ProjectsSection = () => {
                             height: '36px',
                             background: '#588157',
                             color: 'white',
-                            boxShadow: 'none' // Remove shadow
+                            boxShadow: 'none'
                         }
                     }, 'View Live'),
                     project.links?.code && React.createElement('a', {
@@ -134,11 +174,11 @@ const ProjectsSection = () => {
                             height: '36px',
                             background: 'transparent',
                             color: '#588157',
-                            boxShadow: 'none' // Remove shadow
+                            boxShadow: 'none'
                         }
                     }, 'View Code'),
                     project.type && React.createElement('span', { 
-                        className: 'project-date',
+                        className: 'project-type',
                         style: {
                             color: '#3A5A40',
                             opacity: '0.8',
@@ -199,7 +239,7 @@ const ProjectsSection = () => {
                                 fontFamily: '"Montserrat", sans-serif',
                                 border: '1px solid rgba(88, 129, 87, 0.4)',
                                 transition: 'all 0.3s ease',
-                                boxShadow: 'none' // Remove shadow
+                                boxShadow: 'none'
                             }
                         }, tech)
                     )
@@ -213,12 +253,12 @@ const ProjectsSection = () => {
         style: {
             margin: '120px 0',
             padding: '60px 40px',
-            background: 'rgba(163, 177, 138, 0.15) !important', // Stronger green background
+            background: 'rgba(163, 177, 138, 0.15) !important',
             borderRadius: '20px',
             border: '1px solid rgba(88, 129, 87, 0.2)',
             position: 'relative',
             backdropFilter: 'blur(15px)',
-            boxShadow: 'none' // Remove shadow
+            boxShadow: 'none'
         }
     },
         React.createElement('h2', { 
@@ -250,6 +290,11 @@ const ProjectsSection = () => {
 };
 
 // Use createRoot instead of ReactDOM.render
-const container = document.getElementById('projects-container');
-const root = createRoot(container);
-root.render(React.createElement(ProjectsSection));
+const container = document.getElementById('projects');
+if (container) {
+    const root = createRoot(container);
+    root.render(React.createElement(ProjectsSection));
+    console.log('Projects component rendered');
+} else {
+    console.error('Projects container not found');
+}

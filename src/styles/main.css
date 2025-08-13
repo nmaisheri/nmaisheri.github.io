@@ -5,12 +5,29 @@
     box-sizing: border-box;
 }
 
-html, body {
+html {
+    scroll-padding-top: 120px !important;
     height: 100%;
     font-family: var(--font-family);
     background-color: #000000;
     color: #ffffff;
     overflow-x: hidden;
+}
+
+/* Also ensure body doesn't interfere */
+body {
+    height: auto !important; /* Change from 100% to auto */
+    min-height: 100vh !important;
+    font-family: var(--font-family);
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 #backgroundCanvas {
@@ -22,12 +39,6 @@ html, body {
     z-index: -999 !important;
     pointer-events: none !important;
     background: #DAD7CD;
-}
-
-body {
-    position: relative;
-    z-index: 1;
-    background: transparent;
 }
 
 /* Header styles */
@@ -51,10 +62,84 @@ header {
     z-index: 1000;
     width: 100%;
     border: none;
-    animation: headerFadeIn 1.5s ease-out forwards;
-    opacity: 0;
 }
 
+/* Header nav styles */
+header nav {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Floating sidebar navigation */
+.nav-container {
+    position: fixed;
+    top: -100px; /* Start above viewport */
+    right: 20px; /* Adjust position to be more to the right */
+    background: transparent; /* Remove background */
+    backdrop-filter: none; /* Remove blur */
+    border: none; /* Remove border */
+    border-radius: 12px; /* Slightly smaller radius */
+    padding: 14px 22px !important; /* Slightly larger padding */
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none; /* Remove shadow */
+    z-index: 1000;
+    max-width: 180px; /* Slightly smaller width */
+}
+
+/* When scrolled, show the navigation */
+.nav-container.visible {
+    transform: translateY(140px); /* Adjust based on your needs */
+    opacity: 1;
+}
+
+/* Vertical navigation list */
+.nav-container ul {
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important; /* Reduced gap */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-container li {
+    position: relative !important;
+}
+
+/* Update the sidebar nav link styles */
+.nav-container a {
+    color: var(--color-primary-darker) !important;
+    text-decoration: none !important;
+    padding: 12px 16px !important; /* Slightly larger padding */
+    font-size: 16px !important; /* Increased from 14px */
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    display: block !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    font-family: "Montserrat", sans-serif !important;
+    white-space: nowrap !important;
+}
+
+/* Hover effect for sidebar nav */
+.nav-container a:hover {
+    color: #588157 !important;
+    background: transparent !important; /* Remove hover background */
+    border: none !important; /* Remove hover border */
+    transform: translateX(-5px) !important;
+}
+
+/* Test - make it always visible first */
+.nav-container.test-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Standard styles for the nav that sits in the header */
 header nav ul {
     list-style: none;
     display: flex;
@@ -64,6 +149,7 @@ header nav ul {
     padding: 0 40px;
 }
 
+/* Style for nav links */
 header nav a {
     color: var(--color-primary-darker);
     text-decoration: none;
@@ -73,15 +159,11 @@ header nav a {
     font-weight: 300;
     letter-spacing: 1px;
     transition: var(--transition-normal);
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0;
-    backdrop-filter: none;
-    font-family: var(--font-family);
-    z-index: 1002;
 }
 
-header nav a::after {
+/* Hover effect for nav links */
+header nav a::after,
+.nav-container a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -93,65 +175,32 @@ header nav a::after {
     transform: translateX(-50%);
 }
 
-header nav a:hover::after {
+header nav a:hover::after,
+.nav-container a:hover::after {
     width: 100%;
 }
 
-header nav a:hover {
-    color: var(--color-primary) !important;
+header nav a:hover,
+.nav-container a:hover {
+    color: var(--color-primary);
     transform: translateY(-2px);
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    backdrop-filter: none !important;
 }
 
-h1 {
-    margin: 0;
-    font-size: var(--font-size-4xl);
-    font-weight: 100;
-    position: relative;
-    z-index: 1001;
-    letter-spacing: 3px;
-    color: var(--color-primary-darker);
-    font-family: var(--font-family);
-}
-
-header p {
-    color: var(--color-primary-dark);
-    font-size: var(--font-size-xl);
-    margin-top: 10px;
-    opacity: 0.9;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    font-family: var(--font-family);
-}
-
-h2 {
-    font-size: var(--font-size-4xl);
-    margin: 40px 0 20px;
-    text-align: center;
-    color: var(--color-primary-darker);
-    position: relative;
-    z-index: 1001;
-    font-weight: 200;
-    letter-spacing: 2px;
-    font-family: var(--font-family);
-}
-
-h3 {
-    font-family: var(--font-family);
-    font-weight: 400;
-}
+/* Smooth scroll behavior for anchor links */
+/* html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; / Adjust based on nav height /
+} */
 
 main {
-    position: relative;
-    z-index: 100;
+    position: relative !important;
+    z-index: 100 !important;
+    height: auto !important;
+    min-height: 100vh !important;
     padding: 80px 20px;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 100vh;
+    padding-top: 20px;
 }
 
 section {
@@ -186,8 +235,70 @@ footer {
     font-family: var(--font-family);
 }
 
-/* Mobile responsive */
+/* About Me section styles */
+#introduction {
+    margin: 80px auto;
+    padding: 60px 40px;
+    max-width: 900px;
+    background: rgba(163, 177, 138, 0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(88, 129, 87, 0.2);
+    backdrop-filter: blur(15px);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#introduction h2 {
+    font-size: 2.5em;
+    color: #344E41;
+    margin-bottom: 30px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-family: "Montserrat", sans-serif;
+}
+
+#introduction p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #3A5A40;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Hover effect for the About Me section */
+#introduction:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -15px rgba(88, 129, 87, 0.2);
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
+    #introduction {
+        margin: 60px 20px;
+        padding: 40px 20px;
+    }
+
+    #introduction h2 {
+        font-size: 2em;
+    }
+
+    #introduction p {
+        font-size: 1.1em;
+    }
+    
+    .nav-container {
+        right: 15px;
+        top: 50%;
+    }
+    
+    .nav-container a {
+        font-size: var(--font-size-sm);
+        padding: 10px 12px;
+    }
+    
+    /* Keep header nav responsive styles */
     header nav ul {
         flex-direction: column;
         gap: 25px;
@@ -198,21 +309,11 @@ footer {
         font-size: var(--font-size-base);
         padding: 12px 0;
     }
-    
-    h1 {
-        font-size: 2.5em;
-    }
+}
 
-    h2 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    main {
-        padding: 40px 15px;
-    }
-    
-    section {
-        margin: 60px 0;
-        padding: var(--spacing-lg) var(--spacing-md);
+/* Ultra-small screens - hide sidebar completely */
+@media (max-width: 480px) {
+    .nav-container {
+        display: none;
     }
 }

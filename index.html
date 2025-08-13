@@ -37,6 +37,17 @@
 <body>
     <canvas id="backgroundCanvas"></canvas>
     
+    <!-- Add this new navigation container that will appear when scrolling -->
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    
     <header>
         <h1>Nipun Maisheri</h1>
         <p>Computer Engineering Student @ UMD</p>
@@ -52,14 +63,18 @@
     <main>
         <section id="introduction">
             <h2>About Me</h2>
-            <p>Sophomore pursuing computer engineering at the University of Maryland, College Park. Take a look at some my work!</p>
+            <p>Sophomore pursuing computer engineering at the University of Maryland, College Park. Passionate about developing innovative solutions and exploring new technologies. Currently focused on software development and system design.</p>
         </section>
         
         <!--Projects Section-->
-        <div id="projects-container"></div>
+        <div id="projects">
+            <h2>Loading Projects...</h2>
+        </div>
 
         <!--Experience Section-->
-        <div id="experience-container"></div>
+        <div id="experience">
+            <h2>Loading Experience...</h2>
+        </div>
     </main>
     
     <footer>
