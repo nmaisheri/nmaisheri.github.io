@@ -40,7 +40,7 @@ const ProjectsSection = () => {
             title: "Java Data Structures & Algorithms Suite",
             date: "March 2025",
             description: "A comprehensive suite of data structures and algorithms implemented in Java, designed to help students understand core concepts through interactive visualizations and hands-on coding exercises.",
-            details: "Utilizes JavaFX for the front-end and a custom-built server for handling user interactions and data storage.",
+            details: "All User information was saved locally, and generated over 45 different users, helping them learn the basic of object oriented programming",
             technologies: ["Java", "JavaFX", "Data Structures", "Algorithms", "Interactive UI"],
             type: "Academic Project"
         },
@@ -62,8 +62,8 @@ const ProjectsSection = () => {
                 background: 'rgba(163, 177, 138, 0.1)',
                 border: '1px solid rgba(88, 129, 87, 0.3)',
                 borderRadius: '15px',
-                padding: '30px',
-                margin: '40px 0',
+                padding: window.innerWidth <= 768 ? '20px' : '30px',
+                margin: window.innerWidth <= 768 ? '20px 0' : '40px 0',
                 transition: 'all 0.3s ease',
                 backdropFilter: 'blur(10px)',
                 boxShadow: 'none'

@@ -234,8 +234,8 @@ const ExperienceSection = () => {
     return React.createElement('section', { 
         id: 'experience',
         style: {
-            margin: '120px 0',
-            padding: '60px 40px',
+            margin: window.innerWidth <= 768 ? '60px 10px' : '120px 0',
+            padding: window.innerWidth <= 768 ? '30px 20px' : '60px 40px',
             background: 'rgba(163, 177, 138, 0.08)',
             borderRadius: '20px',
             border: '1px solid rgba(88, 129, 87, 0.2)',
