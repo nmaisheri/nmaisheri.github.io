@@ -27,6 +27,44 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.opacity = '0';
     });
 
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.className = 'fa fa-sun';
+        updateBackgroundCanvas();
+    }
+
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        
+        if (document.body.classList.contains('dark-mode')) {
+            themeIcon.className = 'fa fa-sun';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeIcon.className = 'fa fa-moon';
+            localStorage.setItem('theme', 'light');
+        }
+        
+        // This is the key addition - force the background canvas to update
+        updateBackgroundCanvas();
+    });
+
+    // Function to force update the background canvas
+    function updateBackgroundCanvas() {
+        const canvas = document.getElementById('backgroundCanvas');
+        if (!canvas) return;
+        
+        // Reinitialize the entire animation
+        if (window.reinitializeBackgroundAnimation) {
+            window.reinitializeBackgroundAnimation();
+        }
+    }
+
     // NATIVE SMOOTH SCROLL FUNCTION
     function forceScrollTo(target) {
         if (!target) return;

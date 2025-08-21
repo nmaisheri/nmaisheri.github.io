@@ -1,3 +1,49 @@
+/* Root color variables - Light Mode (default) */
+:root {
+    --bg-primary: #DAD7CD;        /* Light background */
+    --bg-secondary: #A3B18A;      /* Medium light */
+    --accent-primary: #588157;     /* Medium green */
+    --accent-secondary: #3A5A40;   /* Darker green */
+    --text-primary: #344E41;       /* Darkest green */
+    --text-secondary: #3A5A40;     /* Dark green */
+    --border-color: rgba(88, 129, 87, 0.3);
+    --section-bg: rgba(163, 177, 138, 0.08);
+    --hover-bg: rgba(88, 129, 87, 0.1);
+    
+    /* Add aliases for variables.css compatibility */
+    --color-primary: #588157;
+    --color-primary-light: #A3B18A;
+    --color-primary-dark: #3A5A40;
+    --color-primary-darker: #344E41;
+    --font-family: "Montserrat", sans-serif;
+    --font-size-lg: 1.1em;
+    --font-size-xl: 1.2em;
+    --spacing-2xl: 60px;
+    --spacing-xl: 40px;
+    --border-radius-lg: 20px;
+    --transition-normal: all 0.3s ease;
+    --shadow-none: none;
+}
+
+/* Dark Mode - Switch the palette */
+body.dark-mode {
+    --bg-primary: #344E41;         /* Dark background */
+    --bg-secondary: #3A5A40;       /* Medium dark */
+    --accent-primary: #A3B18A;     /* Light green */
+    --accent-secondary: #588157;   /* Medium green */
+    --text-primary: #DAD7CD;       /* Light text */
+    --text-secondary: #A3B18A;     /* Light green text */
+    --border-color: rgba(163, 177, 138, 0.3);
+    --section-bg: rgba(218, 215, 205, 0.08);
+    --hover-bg: rgba(163, 177, 138, 0.1);
+    
+    /* Update aliases for dark mode */
+    --color-primary: #A3B18A;
+    --color-primary-light: #DAD7CD;
+    --color-primary-dark: #588157;
+    --color-primary-darker: #DAD7CD;
+}
+
 /* Main styles using CSS variables */
 * {
     margin: 0;
@@ -9,8 +55,8 @@ html {
     scroll-padding-top: 120px !important;
     height: 100%;
     font-family: var(--font-family);
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
     overflow-x: hidden;
 }
 
@@ -19,8 +65,7 @@ body {
     height: auto !important; /* Change from 100% to auto */
     min-height: 100vh !important;
     font-family: var(--font-family);
-    background-color: #000000;
-    color: #ffffff;
+    color: var(--text-primary) !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
     position: relative;
@@ -38,7 +83,7 @@ body {
     height: 100vh !important;
     z-index: -999 !important;
     pointer-events: none !important;
-    background: #DAD7CD;
+    background-color: var(--bg-primary) !important;
 }
 
 /* Header styles */
@@ -53,15 +98,24 @@ body {
     }
 }
 
+/* Update header styles to use variables */
 header {
     background: transparent !important;
-    color: var(--color-primary-darker);
+    color: var(--text-primary) !important;
     padding: 40px 0;
     text-align: center;
     position: relative;
     z-index: 1000;
     width: 100%;
     border: none;
+}
+
+header h1 {
+    color: var(--text-primary) !important;
+}
+
+header p {
+    color: var(--text-secondary) !important;
 }
 
 /* Header nav styles */
@@ -110,7 +164,7 @@ header nav {
 
 /* Update the sidebar nav link styles */
 .nav-container a {
-    color: var(--color-primary-darker) !important;
+    color: var(--accent-secondary) !important;
     text-decoration: none !important;
     padding: 12px 16px !important; /* Slightly larger padding */
     font-size: 16px !important; /* Increased from 14px */
@@ -127,8 +181,8 @@ header nav {
 
 /* Hover effect for sidebar nav */
 .nav-container a:hover {
-    color: #588157 !important;
-    background: transparent !important; /* Remove hover background */
+    color: var(--accent-primary) !important;
+    background: var(--hover-bg) !important;
     border: none !important; /* Remove hover border */
     transform: translateX(-5px) !important;
 }
@@ -151,7 +205,7 @@ header nav ul {
 
 /* Style for nav links */
 header nav a {
-    color: var(--color-primary-darker);
+    color: var(--accent-secondary) !important;
     text-decoration: none;
     padding: 15px 20px;
     position: relative;
@@ -182,7 +236,7 @@ header nav a:hover::after,
 
 header nav a:hover,
 .nav-container a:hover {
-    color: var(--color-primary);
+    color: var(--accent-primary) !important;
     transform: translateY(-2px);
 }
 
@@ -203,12 +257,23 @@ main {
     padding-top: 20px;
 }
 
+/* Update all sections */
+section,
+#introduction,
+.project,
+.experience-item,
+.contact-redirect,
+.skill-category {
+    background: var(--section-bg) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
 section {
     margin: 120px 0;
     padding: var(--spacing-2xl) var(--spacing-xl);
-    background: var(--bg-section) !important;
+    background: var(--section-bg) !important;
     border-radius: var(--border-radius-lg);
-    border: 1px solid var(--border-light) !important;
+    border: 1px solid var(--border-color) !important;
     position: relative;
     z-index: 101;
     backdrop-filter: blur(15px);
@@ -221,7 +286,7 @@ p {
     text-align: center;
     position: relative;
     z-index: 102;
-    color: var(--color-primary-dark);
+    color: var(--text-secondary) !important;
     font-weight: 300;
     font-family: var(--font-family);
 }
@@ -240,9 +305,9 @@ footer {
     margin: 80px auto;
     padding: 60px 40px;
     max-width: 900px;
-    background: rgba(163, 177, 138, 0.08);
+    background: var(--section-bg) !important;
     border-radius: 20px;
-    border: 1px solid rgba(88, 129, 87, 0.2);
+    border: 1px solid var(--border-color) !important;
     backdrop-filter: blur(15px);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -250,7 +315,7 @@ footer {
 
 #introduction h2 {
     font-size: 2.5em;
-    color: #344E41;
+    color: var(--text-primary) !important;
     margin-bottom: 30px;
     font-weight: 300;
     letter-spacing: 2px;
@@ -260,7 +325,7 @@ footer {
 #introduction p {
     font-size: 1.2em;
     line-height: 1.8;
-    color: #3A5A40;
+    color: var(--text-secondary) !important;
     max-width: 700px;
     margin: 0 auto;
     font-weight: 300;
@@ -270,55 +335,81 @@ footer {
 /* Hover effect for the About Me section */
 #introduction:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px -15px rgba(88, 129, 87, 0.2);
+    box-shadow: 0 10px 30px -15px var(--border-color) !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color) !important;
+    background: var(--section-bg) !important;
+    backdrop-filter: blur(10px);
+    color: var(--text-primary) !important;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--hover-bg) !important;
+    transform: scale(1.1);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    /* Don't override individual properties, let the root variables handle it */
+}
+
+/* Project links */
+.project-link {
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+}
+
+.project-link:hover {
+    background: var(--hover-bg) !important;
+}
+
+.project-link.live {
+    background: var(--accent-primary) !important;
+    color: var(--bg-primary) !important;
+}
+
+/* Technology tags */
+.tech-tag {
+    background: var(--hover-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Skills items */
+.skill-item {
+    background: var(--section-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Project dates and metadata */
+.project-date {
+    color: var(--accent-primary) !important;
+}
+
+/* Hover effects */
+.project:hover,
+#introduction:hover {
+    box-shadow: 0 10px 30px -15px var(--border-color) !important;
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
-    #introduction {
-        margin: 60px 20px;
-        padding: 40px 20px;
-    }
-
-    #introduction h2 {
-        font-size: 2em;
-    }
-
-    #introduction p {
-        font-size: 1.1em;
-    }
-    
-    .nav-container {
-        right: 15px;
-        top: 50%;
-    }
-    
-    .nav-container a {
-        font-size: var(--font-size-sm);
-        padding: 10px 12px;
-    }
-    
-    /* Keep header nav responsive styles */
-    header nav ul {
-        flex-direction: column;
-        gap: 25px;
-        padding: 0 20px;
-    }
-    
-    header nav a {
-        font-size: var(--font-size-base);
-        padding: 12px 0;
-    }
-}
-
-/* Ultra-small screens - hide sidebar completely */
-@media (max-width: 480px) {
-    .nav-container {
-        display: none;
-    }
-}
-
-/* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
     /* Header adjustments */
     header {
@@ -329,62 +420,133 @@ footer {
         font-size: 2em;
     }
 
-    /* Project section adjustments */
-    #projects {
-        margin: 60px 10px;
-        padding: 30px 20px;
-    }
-
-    .project {
-        padding: 20px;
-        margin: 20px 0;
-    }
-
-    .project-header {
+    header nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 25px;
     }
 
-    .project-links {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    /* Experience section adjustments */
-    #experience {
-        margin: 60px 10px;
-        padding: 30px 20px;
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* Hide floating sidebar on mobile */
+    /* Hide sidebar on mobile */
     .nav-container {
         display: none;
     }
 
-    /* Adjust section headings */
-    section h2 {
-        font-size: 2em !important;
+    /* Fix the background for mobile - remove the dark overlay */
+    #backgroundCanvas {
+        position: fixed !important;
+        opacity: 1 !important; /* Change back to full opacity */
+        animation: none !important;
+        filter: none !important; /* Remove the blur */
+        touch-action: none !important;
+        pointer-events: none !important;
+        user-select: none !important;
     }
 
-    /* Adjust main content padding */
+    /* Content adjustments */
     main {
         padding: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    section {
+        margin: 60px 10px;
+        padding: 30px 20px;
+    }
+
+    /* Typography and component adjustments */
+    p {
+        font-size: 1em !important;
+        line-height: 1.6;
+    }
+
+    section h2 {
+        font-size: 1.6em !important;
+        margin-bottom: 15px !important;
+    }
+
+    section > p {
+        font-size: 0.9em !important;
+        padding: 0 10px !important;
+    }
+
+    /* Project title adjustments */
+    .project h3 {
+        font-size: 1.2em !important;
+        line-height: 1.4 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Project description adjustments */
+    .project-description p {
+        font-size: 0.9em !important;
+        line-height: 1.5 !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Technology tags adjustment */
+    .tech-tag {
+        font-size: 0.75em !important;
+        padding: 3px 8px !important;
+        margin: 2px !important;
+    }
+
+    /* Project card padding */
+    .project {
+        padding: 15px !important;
+        margin: 15px 0 !important;
+    }
+
+    /* Button/link adjustments */
+    .project-link {
+        padding: 6px 12px !important;
+        font-size: 0.85em !important;
+    }
+
+    /* Project date */
+    .project-date {
+        font-size: 0.85em !important;
     }
 }
 
-/* Tablet Responsive Styles */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .project-links {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 10px;
-    }
+/* Update all navigation styles */
+header nav a,
+.nav-container a {
+    color: var(--accent-secondary) !important;
+}
 
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
+header nav a:hover,
+.nav-container a:hover {
+    color: var(--accent-primary) !important;
+}
+
+/* Update all headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+}
+
+/* Update all text */
+p, span, li, .project-date, .company, .duration, .location {
+    color: var(--text-secondary) !important;
+}
+
+/* Update project links */
+.project-link {
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+}
+
+.project-link:hover {
+    background: var(--hover-bg) !important;
+}
+
+.project-link.live {
+    background: var(--accent-primary) !important;
+    color: var(--bg-primary) !important;
+}
+
+/* Update tech tags */
+.tech-tag {
+    background: var(--hover-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
 }
