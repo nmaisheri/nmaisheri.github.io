@@ -26,7 +26,7 @@
 }
 
 /* Dark Mode - Switch the palette */
-body.dark-mode {
+:root.dark-mode {
     --bg-primary: #344E41;         /* Dark background */
     --bg-secondary: #3A5A40;       /* Medium dark */
     --accent-primary: #A3B18A;     /* Light green */
@@ -362,11 +362,6 @@ footer {
 .theme-toggle:hover {
     background: var(--hover-bg) !important;
     transform: scale(1.1);
-}
-
-/* Dark mode styles */
-body.dark-mode {
-    /* Don't override individual properties, let the root variables handle it */
 }
 
 /* Project links */
