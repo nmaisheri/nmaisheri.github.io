@@ -34,15 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
         themeIcon.className = 'fa fa-sun';
         updateBackgroundCanvas();
     }
 
     themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
+        document.documentElement.classList.toggle('dark-mode');
         
-        if (document.body.classList.contains('dark-mode')) {
+        if (document.documentElement.classList.contains('dark-mode')) {
             themeIcon.className = 'fa fa-sun';
             localStorage.setItem('theme', 'dark');
         } else {

@@ -59,8 +59,8 @@ const ProjectsSection = () => {
         React.createElement('div', { 
             className: 'project',
             style: {
-                background: 'rgba(163, 177, 138, 0.1)',
-                border: '1px solid rgba(88, 129, 87, 0.3)',
+                background: 'var(--section-bg)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '15px',
                 padding: window.innerWidth <= 768 ? '20px' : '30px',
                 margin: window.innerWidth <= 768 ? '20px 0' : '40px 0',
@@ -89,7 +89,7 @@ const ProjectsSection = () => {
                 },
                     React.createElement('h3', { 
                         style: { 
-                            color: '#344E41', 
+                            color: 'var(--text-primary)', 
                             margin: '0 0 8px 0',
                             fontSize: '1.4em',
                             fontWeight: '500',
@@ -100,7 +100,7 @@ const ProjectsSection = () => {
                     React.createElement('div', {
                         className: 'project-date',
                         style: {
-                            color: '#588157',
+                            color: 'var(--accent-primary)',
                             fontSize: '0.95em',
                             fontFamily: '"Montserrat", sans-serif',
                             fontWeight: '400',
@@ -142,14 +142,14 @@ const ProjectsSection = () => {
                             fontWeight: '500',
                             transition: 'all 0.3s ease',
                             fontFamily: '"Montserrat", sans-serif',
-                            border: '1px solid #588157',
+                            border: '1px solid var(--accent-primary)',
                             whiteSpace: 'nowrap',
                             display: 'inline-flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             height: '36px',
-                            background: '#588157',
-                            color: 'white',
+                            background: 'var(--accent-primary)',
+                            color: 'var(--bg-primary)',
                             boxShadow: 'none'
                         }
                     }, 'View Live'),
@@ -166,21 +166,21 @@ const ProjectsSection = () => {
                             fontWeight: '500',
                             transition: 'all 0.3s ease',
                             fontFamily: '"Montserrat", sans-serif',
-                            border: '1px solid #588157',
+                            border: '1px solid var(--accent-primary)',
                             whiteSpace: 'nowrap',
                             display: 'inline-flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             height: '36px',
                             background: 'transparent',
-                            color: '#588157',
+                            color: 'var(--accent-primary)',
                             boxShadow: 'none'
                         }
                     }, 'View Code'),
                     project.type && React.createElement('span', { 
                         className: 'project-type',
                         style: {
-                            color: '#3A5A40',
+                            color: 'var(--text-secondary)',
                             opacity: '0.8',
                             fontSize: '0.9em',
                             fontFamily: '"Montserrat", sans-serif',
@@ -201,7 +201,7 @@ const ProjectsSection = () => {
                         fontSize: '1.1em', 
                         lineHeight: '1.6', 
                         marginBottom: '15px',
-                        color: '#3A5A40'
+                        color: 'var(--text-secondary)'
                     } 
                 }, project.description),
                 React.createElement('p', { 
@@ -210,7 +210,7 @@ const ProjectsSection = () => {
                         fontSize: '1.1em', 
                         lineHeight: '1.6', 
                         marginBottom: '20px',
-                        color: '#3A5A40',
+                        color: 'var(--text-secondary)',
                         opacity: '0.9'
                     } 
                 }, project.details),
@@ -222,7 +222,7 @@ const ProjectsSection = () => {
                         gap: '8px',
                         marginTop: '15px',
                         paddingTop: '15px',
-                        borderTop: '1px solid rgba(88, 129, 87, 0.3)'
+                        borderTop: '1px solid var(--border-color)'
                     }
                 },
                     project.technologies.map((tech, index) =>
@@ -230,14 +230,14 @@ const ProjectsSection = () => {
                             key: index, 
                             className: 'tech-tag',
                             style: {
-                                background: 'rgba(88, 129, 87, 0.2)',
-                                color: '#344E41',
+                                background: 'var(--hover-bg)',
+                                color: 'var(--text-primary)',
                                 padding: '4px 12px',
                                 borderRadius: '15px',
                                 fontSize: '0.8em',
                                 fontWeight: '400',
                                 fontFamily: '"Montserrat", sans-serif',
-                                border: '1px solid rgba(88, 129, 87, 0.4)',
+                                border: '1px solid var(--border-color)',
                                 transition: 'all 0.3s ease',
                                 boxShadow: 'none'
                             }
@@ -253,9 +253,9 @@ const ProjectsSection = () => {
         style: {
             margin: '120px 0',
             padding: '60px 40px',
-            background: 'rgba(163, 177, 138, 0.15) !important',
+            background: 'var(--section-bg)',
             borderRadius: '20px',
-            border: '1px solid rgba(88, 129, 87, 0.2)',
+            border: '1px solid var(--border-color)',
             position: 'relative',
             backdropFilter: 'blur(15px)',
             boxShadow: 'none'
@@ -266,7 +266,7 @@ const ProjectsSection = () => {
                 fontSize: '2.5em', 
                 margin: '40px 0 20px', 
                 textAlign: 'center', 
-                color: '#344E41', 
+                color: 'var(--text-primary)', 
                 fontWeight: '300', 
                 letterSpacing: '2px',
                 fontFamily: '"Montserrat", sans-serif'
@@ -277,7 +277,7 @@ const ProjectsSection = () => {
                 lineHeight: '1.8', 
                 fontSize: '1.2em', 
                 textAlign: 'center', 
-                color: '#3A5A40', 
+                color: 'var(--text-secondary)', 
                 fontWeight: '300',
                 fontFamily: '"Montserrat", sans-serif',
                 marginBottom: '40px'
