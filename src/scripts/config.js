@@ -5,7 +5,7 @@ const CONFIG = {
     EMAIL: 'maisherinipun@gmail.com',
     PHONE: '(240) 665-9411',
     LOCATION: 'College Park, MD',
-    RESUME_PATH: 'assests/resume.pdf'
+    RESUME_PATH: 'assets/resume.pdf'
 };
 
 export default CONFIG;

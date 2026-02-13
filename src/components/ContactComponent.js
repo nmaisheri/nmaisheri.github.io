@@ -313,7 +313,7 @@ const ContactSection = () => {
                     )
                 ),
                 React.createElement('a', {
-                    href: '../assests/resume.pdf',
+                    href: '../assets/resume.pdf',
                     download: 'Resume.pdf',
                     className: 'download-btn',
                     style: {
