@@ -37,12 +37,16 @@ const ProjectsSection = () => {
         },
         {
             id: 4,
-            title: "Java Data Structures & Algorithms Suite",
+            title: "Data Structure Visualizer",
             date: "March 2025",
-            description: "A comprehensive suite of data structures and algorithms implemented in Java, designed to help students understand core concepts through interactive visualizations and hands-on coding exercises.",
-            details: "All User information was saved locally, and generated over 45 different users, helping them learn the basic of object oriented programming",
-            technologies: ["Java", "JavaFX", "Data Structures", "Algorithms", "Interactive UI"],
-            type: "Academic Project"
+            description: "An interactive web application that visualizes core data structures and operations in real time to make learning computer science concepts more intuitive.",
+            details: "Built as a browser-based learning tool with clean animations and step-by-step interactions so users can better understand how each data structure behaves under different operations.",
+            technologies: ["HTML/CSS", "JavaScript", "Data Structures", "Algorithms", "Interactive UI"],
+            links: {
+                live: "https://nmaisheri.github.io/Data-Structure-Visualizer/",
+                code: "https://github.com/nmaisheri/Data-Structure_Visualizer"
+            },
+            type: "Personal Project"
         },
         {
             id: 5,
