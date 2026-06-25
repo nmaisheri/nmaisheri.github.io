@@ -54,8 +54,8 @@ const ExperienceSection = () => {
         React.createElement('div', { 
             className: 'experience-item',
             style: {
-                background: 'rgba(163, 177, 138, 0.1)',
-                border: '1px solid rgba(88, 129, 87, 0.3)',
+                background: 'var(--section-bg)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '15px',
                 padding: '30px',
                 margin: '40px 0',
@@ -72,7 +72,7 @@ const ExperienceSection = () => {
             },
                 React.createElement('h3', { 
                     style: { 
-                        color: '#344E41', 
+                        color: 'var(--text-primary)', 
                         margin: '0 0 15px 0',
                         fontSize: '1.4em',
                         fontWeight: '500',
@@ -90,7 +90,7 @@ const ExperienceSection = () => {
                     React.createElement('span', { 
                         className: 'company',
                         style: {
-                            color: '#588157',
+                            color: 'var(--accent-primary)',
                             fontSize: '1.1em',
                             fontWeight: '500',
                             fontFamily: '"Montserrat", sans-serif'
@@ -107,7 +107,7 @@ const ExperienceSection = () => {
                         React.createElement('span', { 
                             className: 'duration',
                             style: {
-                                color: '#3A5A40',
+                                color: 'var(--text-secondary)',
                                 fontFamily: '"Montserrat", sans-serif',
                                 fontWeight: '400'
                             }
@@ -115,7 +115,7 @@ const ExperienceSection = () => {
                         React.createElement('span', { 
                             className: 'location',
                             style: {
-                                color: '#3A5A40',
+                                color: 'var(--text-secondary)',
                                 opacity: '0.8',
                                 fontFamily: '"Montserrat", sans-serif',
                                 fontStyle: 'italic'
@@ -127,7 +127,7 @@ const ExperienceSection = () => {
             React.createElement('div', { 
                 className: 'experience-description',
                 style: {
-                    borderTop: '1px solid rgba(88, 129, 87, 0.3)',
+                    borderTop: '1px solid var(--border-color)',
                     paddingTop: '20px'
                 }
             },
@@ -137,7 +137,7 @@ const ExperienceSection = () => {
                         fontSize: '1.1em', 
                         lineHeight: '1.6', 
                         marginBottom: '20px',
-                        color: '#3A5A40',
+                        color: 'var(--text-secondary)',
                         fontFamily: '"Montserrat", sans-serif'
                     } 
                 }, experience.description),
@@ -156,7 +156,7 @@ const ExperienceSection = () => {
                                 position: 'relative',
                                 paddingLeft: '25px',
                                 marginBottom: '12px',
-                                color: '#3A5A40',
+                                color: 'var(--text-secondary)',
                                 fontSize: '1em',
                                 lineHeight: '1.5',
                                 fontFamily: '"Montserrat", sans-serif'
@@ -170,7 +170,7 @@ const ExperienceSection = () => {
                                     width: '6px',
                                     height: '6px',
                                     borderRadius: '50%',
-                                    background: '#588157'
+                                    background: 'var(--accent-primary)'
                                 }
                             }),
                             achievement
@@ -185,8 +185,8 @@ const ExperienceSection = () => {
         React.createElement('div', { 
             className: 'skill-category',
             style: {
-                background: 'rgba(163, 177, 138, 0.1)',
-                border: '1px solid rgba(88, 129, 87, 0.3)',
+                background: 'var(--section-bg)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '12px',
                 padding: '20px',
                 transition: 'all 0.3s ease',
@@ -196,7 +196,7 @@ const ExperienceSection = () => {
         },
             React.createElement('h4', { 
                 style: { 
-                    color: '#344E41', 
+                    color: 'var(--text-primary)', 
                     margin: '0 0 12px 0',
                     fontSize: '1.1em',
                     fontWeight: '500',
@@ -214,14 +214,14 @@ const ExperienceSection = () => {
                     React.createElement('span', {
                         key: index,
                         style: {
-                            background: 'rgba(88, 129, 87, 0.2)',
-                            color: '#344E41',
+                            background: 'var(--hover-bg)',
+                            color: 'var(--text-primary)',
                             padding: '4px 12px',
                             borderRadius: '15px',
                             fontSize: '0.8em',
                             fontWeight: '400',
                             fontFamily: '"Montserrat", sans-serif',
-                            border: '1px solid rgba(88, 129, 87, 0.4)',
+                            border: '1px solid var(--border-color)',
                             transition: 'all 0.3s ease',
                             boxShadow: 'none'
                         }
@@ -236,9 +236,9 @@ const ExperienceSection = () => {
         style: {
             margin: window.innerWidth <= 768 ? '60px 10px' : '120px 0',
             padding: window.innerWidth <= 768 ? '30px 20px' : '60px 40px',
-            background: 'rgba(163, 177, 138, 0.08)',
+            background: 'var(--section-bg)',
             borderRadius: '20px',
-            border: '1px solid rgba(88, 129, 87, 0.2)',
+            border: '1px solid var(--border-color)',
             position: 'relative',
             backdropFilter: 'blur(15px)',
             boxShadow: 'none'
@@ -249,7 +249,7 @@ const ExperienceSection = () => {
                 fontSize: '2.5em', 
                 margin: '40px 0 20px', 
                 textAlign: 'center', 
-                color: '#344E41', 
+                color: 'var(--text-primary)', 
                 fontWeight: '300', 
                 letterSpacing: '2px',
                 fontFamily: '"Montserrat", sans-serif'
@@ -260,7 +260,7 @@ const ExperienceSection = () => {
                 lineHeight: '1.8', 
                 fontSize: '1.2em', 
                 textAlign: 'center', 
-                color: '#3A5A40', 
+                color: 'var(--text-secondary)', 
                 fontWeight: '300',
                 fontFamily: '"Montserrat", sans-serif',
                 marginBottom: '40px'
@@ -284,7 +284,7 @@ const ExperienceSection = () => {
                     fontSize: '2em', 
                     margin: '40px 0 30px', 
                     textAlign: 'center', 
-                    color: '#344E41', 
+                    color: 'var(--text-primary)', 
                     fontWeight: '300', 
                     letterSpacing: '1px',
                     fontFamily: '"Montserrat", sans-serif'
@@ -316,8 +316,8 @@ const ExperienceSection = () => {
                 textAlign: 'center',
                 marginTop: '40px',
                 padding: '30px',
-                background: 'rgba(163, 177, 138, 0.1)',
-                border: '1px solid rgba(88, 129, 87, 0.3)',
+                background: 'var(--section-bg)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '15px',
                 backdropFilter: 'blur(10px)',
                 boxShadow: 'none'
@@ -326,7 +326,7 @@ const ExperienceSection = () => {
             React.createElement('p', { 
                 style: { 
                     fontSize: '1.1em', 
-                    color: '#3A5A40',
+                    color: 'var(--text-secondary)',
                     fontFamily: '"Montserrat", sans-serif',
                     margin: '0'
                 } 
@@ -335,11 +335,11 @@ const ExperienceSection = () => {
                 React.createElement('a', {
                     href: 'pages/contact.html',
                     style: { 
-                        color: '#588157',
+                        color: 'var(--accent-primary)',
                         textDecoration: 'none',
                         fontWeight: '500',
                         padding: '8px 16px',
-                        border: '1px solid #588157',
+                        border: '1px solid var(--accent-primary)',
                         borderRadius: '20px',
                         transition: 'all 0.3s ease',
                         display: 'inline-flex',
