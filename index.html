@@ -1,95 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Preload critical resources -->
-    <link rel="preload" href="src/styles/variables.css" as="style">
-    <link rel="preload" href="src/styles/main.css" as="style">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- React CDN - Production Version -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/utilities.css">
-    <link rel="stylesheet" href="src/styles/components.css">
-    <link rel="stylesheet" href="src/styles/main.css">
-    
-    <!-- Meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nipun Maisheri - Portfolio</title>
-    <meta name="description" content="Nipun Maisheri - Computer Engineering Student & Software Developer Portfolio">
-    <meta name="keywords" content="software engineer, computer engineering, portfolio, react, javascript">
-    <meta property="og:title" content="Nipun Maisheri - Portfolio">
-    <meta property="og:description" content="Computer Engineering Student & Software Developer">
-    <link rel="canonical" href="https://nmaisheri.github.io">
-</head>
-<body>
-    <canvas id="backgroundCanvas"></canvas>
-    
-    <!-- Add theme toggle button -->
-    <button id="theme-toggle" class="theme-toggle">
-        <i class="fa fa-moon"></i>
-    </button>
-    
-    <!-- Add this new navigation container that will appear when scrolling -->
-    <div class="nav-container">
-        <nav>
-            <ul>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <header>
-        <h1>Nipun Maisheri</h1>
-        <p>Computer Engineering Student @ UMD</p>
-        <nav>
-            <ul>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="introduction">
-            <h2>About Me</h2>
-            <p>Sophomore pursuing computer engineering at the University of Maryland, College Park. Passionate about developing innovative solutions and exploring new technologies. Currently focused on software development and system design.</p>
-        </section>
-        
-        <!--Projects Section-->
-        <div id="projects">
-            <h2>Loading Projects...</h2>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nipun Maisheri — Portfolio</title>
+    <meta name="description" content="Nipun Maisheri — Computer Engineering student at the University of Maryland and software developer. Projects, experience, and contact." />
+    <meta name="keywords" content="Nipun Maisheri, software engineer, computer engineering, portfolio, react, UMD" />
+    <meta name="author" content="Nipun Maisheri" />
 
-        <!--Experience Section-->
-        <div id="experience">
-            <h2>Loading Experience...</h2>
-        </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 Nipun Maisheri. All rights reserved.</p>
-    </footer>
-    
-    <!-- JavaScript Files -->
-    <script defer src="src/scripts/main.js"></script>
-    <script defer src="src/scripts/background-animation.js"></script>
-    <script defer type="text/babel" src="src/components/ProjectsComponent.js"></script>
-    <script defer type="text/babel" src="src/components/ExperienceComponent.js"></script>
-</body>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nipun Maisheri — Portfolio" />
+    <meta property="og:description" content="Computer Engineering Student @ UMD & Software Developer" />
+    <meta property="og:url" content="https://nmaisheri.github.io" />
+    <link rel="canonical" href="https://nmaisheri.github.io" />
+
+    <!-- Set theme before paint to avoid flash -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

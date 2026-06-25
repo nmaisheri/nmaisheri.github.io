@@ -1,0 +1,78 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: 80px;
+}
+
+.hero-inner {
+  width: 100%;
+}
+
+.hero-eyebrow {
+  margin-bottom: 22px;
+}
+
+.hero-name {
+  font-size: clamp(3rem, 13vw, 8.5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-right: 0.18em;
+}
+.hero-word-inner {
+  display: inline-block;
+}
+
+.hero-actions {
+  margin-top: 40px;
+}
+.hero-actions--spaced {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 6px;
+  margin-left: 6px;
+}
+.hero-socials a {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.hero-socials a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}

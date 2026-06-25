@@ -1,0 +1,62 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss src/styles/*.css --dir dist/css --use autoprefixer cssnano",
+    "build:js": "babel src/components/*.js --out-dir dist/js",
+    "watch": "npm run build && npm run watch:css & npm run watch:js",
+    "watch:css": "postcss src/styles/*.css --dir dist/css --watch",
+    "watch:js": "babel src/components/*.js --out-dir dist/js --watch",
+    "serve": "live-server"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.0",
+    "@babel/core": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "autoprefixer": "^10.4.0",
+    "cssnano": "^6.0.0",
+    "live-server": "^1.2.2",
+    "postcss": "^8.4.0",
+    "postcss-cli": "^10.1.0"
+  },
+  "head": {
+    "meta": [
+      {
+        "name": "description",
+        "content": "Nipun Maisheri - Computer Engineering Student & Software Developer Portfolio"
+      },
+      {
+        "name": "keywords",
+        "content": "software engineer, computer engineering, portfolio, react, javascript"
+      },
+      {
+        "property": "og:title",
+        "content": "Nipun Maisheri - Portfolio"
+      },
+      {
+        "property": "og:description",
+        "content": "Computer Engineering Student & Software Developer"
+      },
+      {
+        "property": "og:image",
+        "content": "assets/images/preview.jpg"
+      }
+    ],
+    "link": [
+      {
+        "rel": "canonical",
+        "href": "https://nmaisheri.github.io"
+      },
+      {
+        "rel": "icon",
+        "type": "image/x-icon",
+        "href": "assets/icons/favicon.ico"
+      },
+      {
+        "rel": "apple-touch-icon",
+        "href": "assets/icons/apple-touch-icon.png"
+      }
+    ]
+  }
+}
