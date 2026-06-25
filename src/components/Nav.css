@@ -95,8 +95,8 @@
   z-index: 50;
 }
 
-/* On small screens keep the nav as edge dots (labels only on active) */
-@media (max-width: 640px) {
-  .side-nav { left: 8px; gap: 2px; }
-  .side-nav a { padding: 7px 9px; }
+/* On mobile the left nav crowds the screen — hide it entirely.
+   The theme toggle and scroll-progress bar remain. */
+@media (max-width: 768px) {
+  .side-nav { display: none; }
 }
