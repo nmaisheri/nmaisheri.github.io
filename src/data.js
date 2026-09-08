@@ -40,6 +40,30 @@ export const profile = {
 
 export const projects = [
   {
+    id: 6,
+    title: 'Wayfare',
+    date: 'September 2026',
+    description:
+      'A budget-first travel planner that turns a destination, total budget, and trip length into a realistic day-by-day itinerary.',
+    details:
+      'Built a deterministic budget engine, AI-generated destination recommendations, live Google Flights pricing, 12-hour route caching, per-visitor quota protection, and graceful fallbacks when external services are unavailable.',
+    technologies: [
+      'Node.js',
+      'JavaScript',
+      'HTML/CSS',
+      'Gemini API',
+      'Claude API',
+      'SerpAPI',
+      'Upstash Redis',
+      'Vercel',
+    ],
+    type: 'Personal Project',
+    links: {
+      live: 'https://wayfare.vercel.app/',
+      code: 'https://github.com/nmaisheri/wayfare',
+    },
+  },
+  {
     id: 1,
     title: 'Interactive Website Portfolio',
     date: 'August 2025',
