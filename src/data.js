@@ -59,7 +59,7 @@ export const projects = [
     ],
     type: 'Personal Project',
     links: {
-      live: 'https://wayfare.vercel.app/',
+      live: 'https://wayfare-hazel.vercel.app/',
       code: 'https://github.com/nmaisheri/wayfare',
     },
   },
