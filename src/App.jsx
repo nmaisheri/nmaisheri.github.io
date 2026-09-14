@@ -7,9 +7,14 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import StartupShell from './components/StartupShell'
 
 export default function App() {
   const { theme, toggle } = useTheme()
+
+  if (window.location.pathname.toLowerCase().startsWith('/startupshell')) {
+    return <StartupShell theme={theme} toggle={toggle} />
+  }
 
   return (
     <>
